@@ -4,7 +4,7 @@
 #include <chrono>
 
 using namespace std;
-constexpr unsigned char MAP1_HEIGHT = 21, MAP1_WIDTH = 21, MAP2_HEIGHT = 21, MAP2_WIDTH = 21;
+constexpr unsigned char MAP1_HEIGHT = 21;
 
 class SacMan
   {
@@ -16,7 +16,16 @@ class SacMan
         speed = _speed;
         maxSpeed = _maxSpeed;
       }
-
+      friend std::ostream& operator<<(std::ostream& stream, const SacMan& Sac)
+      {
+          stream << "Speed: " << Sac.speed << endl;
+          stream << "Max Speed: " << Sac.maxSpeed << endl;
+          stream << "Points: " << Sac.points << endl;
+          return stream;
+        }
+      SacMan& operator=(const SacMan& Sac)
+        = default;
+      ~SacMan() = default;
   };
 
 class Ghost
@@ -28,12 +37,20 @@ class Ghost
         speed = _speed;
         maxSpeed = _maxSpeed;
       }
-
+      friend std::ostream& operator<<(std::ostream& stream, const Ghost& G)
+      {
+        stream << "Speed: " << G.speed << endl;
+        stream << "Max Speed: " << G.maxSpeed << endl;
+        return stream;
+      }
+      Ghost& operator=(const Ghost& G)
+      = default;
+      ~Ghost() = default;
   };
 
 class Level
   {
-    SacMan SacMan{5, 10, 0};
+    SacMan Sac{5, 10, 0};
     Ghost B1{5, 10};
     Ghost B2{5, 10};
     Ghost B3{5, 10};
@@ -66,7 +83,11 @@ class Level
   };
 
 int main()
-  {
+{
+
+
+
+
   Helper helper;
   helper.help();
   return 0;
