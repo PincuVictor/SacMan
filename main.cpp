@@ -2,6 +2,10 @@
 #include <array>
 #include <Helper.h>
 #include <chrono>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
 
 using namespace std;
 constexpr unsigned char MAP1_HEIGHT = 21;
@@ -84,9 +88,6 @@ class Level
 
 int main()
 {
-
-
-
 
   Helper helper;
   helper.help();

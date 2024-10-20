@@ -49,6 +49,12 @@ add_executable(${PROJECT_NAME}
 )
 
 include(cmake/CompilerFlags.cmake)
+set(SFML_ROOT ${PROJECT_SOURCE_DIR}/dependencies/SFML)
+set(SFML_DIR ${PROJECT_SOURCE_DIR}/dependencies/SFML/lib/cmake/SFML)
+find_package(SFML 2.6.1 REQUIRED COMPONENTS audio graphics window system)
+include_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/include)
+link_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/lib)
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 
 ###############################################################################
 
