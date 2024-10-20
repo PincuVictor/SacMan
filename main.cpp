@@ -16,7 +16,7 @@ class SacMan
         speed = _speed;
         maxSpeed = _maxSpeed;
       }
-      std::ostream& operator<<(ostream& stream, const SacMan& Sac) const
+      friend std::ostream& operator<<(std::ostream& stream, const SacMan& Sac)
       {
           stream << "Speed: " << Sac.speed << endl;
           stream << "Max Speed: " << Sac.maxSpeed << endl;
@@ -37,7 +37,7 @@ class Ghost
         speed = _speed;
         maxSpeed = _maxSpeed;
       }
-      std::ostream& operator<<(ostream& stream, const Ghost& G) const
+      friend std::ostream& operator<<(std::ostream& stream, const Ghost& G)
       {
         stream << "Speed: " << G.speed << endl;
         stream << "Max Speed: " << G.maxSpeed << endl;
