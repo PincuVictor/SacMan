@@ -2,6 +2,7 @@
 #include <array>
 #include <Helper.h>
 #include <chrono>
+#include <bits/atomic_base.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -88,7 +89,7 @@ class Level
 
 int main()
 {
-
+  sf::Window window(sf::VideoMode(800,600), "My Window");
   Helper helper;
   helper.help();
   return 0;

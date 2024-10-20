@@ -10,6 +10,8 @@ project(oop)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_FLAGS)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake-default-toolchain.cmake)
 
 include(cmake/Options.cmake)
 
@@ -54,7 +56,7 @@ set(SFML_DIR ${PROJECT_SOURCE_DIR}/dependencies/SFML/lib/cmake/SFML)
 find_package(SFML 2.6.1 REQUIRED COMPONENTS audio graphics window system)
 include_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/include)
 link_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/lib)
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)
 
 ###############################################################################
 

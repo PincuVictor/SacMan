@@ -1,0 +1,18 @@
+D:\CMake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/IDEs/CLion 2024.2.2/bin/ninja/win/x64/ninja.exe" cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja -S D:\Domn_Antreprenor\SacMan -B D:\Domn_Antreprenor\SacMan\cmake-build-debug
+CMake Warning:
+  Ignoring extra path from command line:
+
+   "D:/Domn_Antreprenor/SacMan/cmake-build-debug/cmake"
+
+
+CMake Warning:
+  Ignoring extra path from command line:
+
+   "D:/Domn_Antreprenor/SacMan/cmake-build-debug"
+
+
+Compiler: GNU version 13.2.0
+-- Found SFML 2.6.1 in D:/Domn_Antreprenor/SacMan/dependencies/SFML/lib/cmake/SFML
+-- Configuring done (0.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: D:/Domn_Antreprenor/SacMan/cmake-build-debug
