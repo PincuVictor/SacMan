@@ -1,0 +1,21 @@
+# ninja log v6
+28719	28725	1729505861573557188	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	1b405838750e41f8
+28725	28733	1729505861581560431	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete	caf8b626946d1568
+1	28678	1729505861526538137	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	cbb9309f32646b99
+28707	28713	1729505861561552324	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	cea941891c14cb5a
+28695	28701	1729505861549547460	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch_disconnected	dc946e2aab28e6d6
+28678	28695	1729505861543545028	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update_disconnected	230a8cf55903f38b
+28695	28701	1729505861549547460	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch_disconnected	dc946e2aab28e6d6
+28678	28695	1729505861543545028	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update_disconnected	230a8cf55903f38b
+0	9	1729504764753232985	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	854f1105b21dadb5
+1	28678	1729505861526538137	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download	cbb9309f32646b99
+28719	28725	1729505861573557188	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test	1b405838750e41f8
+0	9	1729504764753232985	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir	854f1105b21dadb5
+28713	28719	1729505861567554756	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	5ad4afe50d459319
+28725	28733	1729505861581560431	CMakeFiles/sfml-populate-complete	caf8b626946d1568
+28713	28719	1729505861567554756	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install	5ad4afe50d459319
+28725	28733	1729505861581560431	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	caf8b626946d1568
+28725	28733	1729505861581560431	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-done	caf8b626946d1568
+28701	28707	1729505861555549892	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	e1ef1d9b5e9110d9
+28707	28713	1729505861561552324	sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build	cea941891c14cb5a
+28701	28707	1729505861555549892	/home/victor/Projects/SacMan/cmake-build-debug/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure	e1ef1d9b5e9110d9
