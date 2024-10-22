@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.10)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
 # for now, the project name is used as the executable name
@@ -10,62 +10,71 @@ project(oop)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS)
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake-default-toolchain.cmake)
 
 include(cmake/Options.cmake)
 
 ###############################################################################
 
 # external dependencies with FetchContent
-# include(FetchContent)
-#
-# set(FETCHCONTENT_QUIET OFF)
-# set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
-#
-# NOTE: Also update env vars used for caching in
-#         - .github/actions/configure-cmake/action.yml
-#         - .github/workflows/cmake.yml
-# FetchContent_Declare(
-#         SomeLib
-#         GIT_REPOSITORY https://github.com/<SomeUser>/<SomeLib>.git
-#         GIT_TAG        <some_git_hash> # <which tag/branch @ <some_date>>
-#         GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
-# )
-#
-# FetchContent_MakeAvailable(SomeLib)
+
+include(FetchContent)
+
+set(FETCHCONTENT_QUIET OFF)
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
+
+# din cauza SFML
+set(WARNINGS_AS_ERRORS OFF)
+
+# NOTE: Also update SFML_VERSION env var in .github/workflows/cmake.yml:84
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG        2.6.1
+        # GIT_TAG        69ea0cd863aed1d4092b970b676924a716ff718b # 2.6.1
+        # GIT_TAG        origin/master
+        GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
+)
+
+FetchContent_MakeAvailable(SFML)
 
 ###############################################################################
 
 # external dependencies with find_package
 
-# find_package(Threads REQUIRED)
+find_package(Threads REQUIRED)
+if(APPLE)
+elseif(UNIX)
+    find_package(X11)
+endif()
 
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${PROJECT_NAME}
-    main.cpp
-    generated/src/Helper.cpp
         main.cpp
+        generated/src/Helper.cpp
+        env_fixes.h
+        env_fixes.h
 )
 
 include(cmake/CompilerFlags.cmake)
-set(SFML_ROOT ${PROJECT_SOURCE_DIR}/dependencies/SFML)
-set(SFML_DIR ${PROJECT_SOURCE_DIR}/dependencies/SFML/lib/cmake/SFML)
-find_package(SFML 2.6.1 REQUIRED COMPONENTS audio graphics window system)
-include_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/include)
-link_directories(${PROJECT_SOURCE_DIR}/dependencies/SFML/lib)
-target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)
 
 ###############################################################################
 
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-# target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
-# target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-# target_link_libraries(${PROJECT_NAME} <SomeLib>)
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
+target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE  sfml-graphics sfml-window sfml-system sfml-system Threads::Threads)
+if (WIN32 AND BUILD_SHARED_LIBS)
+    add_custom_command(TARGET oop POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:oop> $<TARGET_FILE_DIR:oop> COMMAND_EXPAND_LISTS)
+endif()
+if(APPLE)
+elseif(UNIX)
+    target_link_libraries(${PROJECT_NAME} PRIVATE X11)
+endif()
 
 ###############################################################################
 
@@ -75,6 +84,20 @@ install(TARGETS ${PROJECT_NAME} DESTINATION ${DESTINATION_DIR})
 if(APPLE)
     install(FILES launcher.command DESTINATION ${DESTINATION_DIR})
 endif()
+
+# copy dependent DLLs to build dir
+# see https://en.sfml-dev.org/forums/index.php?topic=28580.0
+# remove this if not using audio or if using SFML 3
+if (WIN32 AND SFML_BUILD_AUDIO)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${SFML_SOURCE_DIR}/extlibs/bin/x64/openal32.dll
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+endif()
+
+
+
 
 include(cmake/CopyHelper.cmake)
 copy_files(FILES tastatura.txt)

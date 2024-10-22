@@ -2,11 +2,7 @@
 #include <array>
 #include <Helper.h>
 #include <chrono>
-#include <bits/atomic_base.h>
-#include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/System.hpp>
 
 using namespace std;
 constexpr unsigned char MAP1_HEIGHT = 21;
@@ -89,7 +85,9 @@ class Level
 
 int main()
 {
-  sf::Window window(sf::VideoMode(800,600), "My Window");
+  sf::Window window(sf::VideoMode(800, 600), "SacMan");
+
+
   Helper helper;
   helper.help();
   return 0;

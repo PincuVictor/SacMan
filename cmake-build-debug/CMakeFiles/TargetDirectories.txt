@@ -1,7 +1,0 @@
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/oop.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/list_install_components.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/install.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/install/local.dir
-D:/Domn_Antreprenor/SacMan/cmake-build-debug/CMakeFiles/install/strip.dir
