@@ -2,6 +2,7 @@
 #include <array>
 #include <Helper.h>
 #include <chrono>
+#include <SFML/Window.hpp>
 
 using namespace std;
 constexpr unsigned char MAP1_HEIGHT = 21;
@@ -84,8 +85,7 @@ class Level
 
 int main()
 {
-
-
+  sf::Window window(sf::VideoMode(800, 600), "SacMan");
 
 
   Helper helper;
