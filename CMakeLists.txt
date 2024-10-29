@@ -55,12 +55,22 @@ add_executable(${PROJECT_NAME}
         generated/src/Helper.cpp
         env_fixes.h
         env_fixes.h
+        headers/SacMan.hpp
+        headers/Banker.hpp
+        headers/Level.hpp
 )
 
 include(cmake/CompilerFlags.cmake)
 
 ###############################################################################
-
+find_package(X11)
+if(APPLE AND X11_FOUND)
+    set(CMAKE_FIND_FRAMEWORK NEVER)
+    find_package(OpenGL)
+    unset(CMAKE_FIND_FRAMEWORK)
+else()
+    find_package(OpenGL)
+endif()
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
