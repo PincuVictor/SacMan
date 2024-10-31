@@ -6,22 +6,34 @@ using namespace std;
 
 class SacMan
 {
-    int speed, maxSpeed, points, x, y;
+    int speed, maxSpeed, points;
+    float x, y;
 public:
+    void Update(const sf::Time alpha)
+    {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            SetPosition(x - alpha.asMilliseconds() / 1000.0f * 1, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            SetPosition(x + alpha.asMilliseconds() / 1000.0f * 1, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            SetPosition(x, y + alpha.asMilliseconds() / 1000.0f * 1);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            SetPosition(x, y - alpha.asMilliseconds() / 1000.0f * 1);
+    }
     SacMan(const int _speed, const int _maxSpeed, const int _points)
     {
         speed = _speed;
         maxSpeed = _maxSpeed;
         points = _points;
     }
-    void SetPosition(const int _x, const int _y)
+    void SetPosition(const float _x, const float _y)
     {
         x = _x;
         y = _y;
     }
-    static sf::Vector2<int> GetPosition(SacMan& ig_SacMan)
+    [[nodiscard]] sf::Vector2<float> GetPosition() const
     {
-        return {ig_SacMan.x, ig_SacMan.y};
+        return {x, y};
     }
     friend std::ostream& operator<<(std::ostream& stream, const SacMan& Sac)
     {
