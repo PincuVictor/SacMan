@@ -9,16 +9,16 @@ class SacMan
     int speed, maxSpeed, points;
     float x, y;
 public:
-    void Update(const sf::Time alpha)
+    void Update(const sf::Time alpha, bool dir[])
     {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            SetPosition(x - alpha.asMilliseconds() / 1000.0f * 1, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            SetPosition(x + alpha.asMilliseconds() / 1000.0f * 1, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            SetPosition(x, y + alpha.asMilliseconds() / 1000.0f * 1);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            SetPosition(x, y - alpha.asMilliseconds() / 1000.0f * 1);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir[0] == false)
+            SetPosition(x - alpha.asMilliseconds() / 1000.0f * 2, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir[1] == false)
+            SetPosition(x + alpha.asMilliseconds() / 1000.0f * 2, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir[2] == false)
+            SetPosition(x, y - alpha.asMilliseconds() / 1000.0f * 2);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[3] == false)
+            SetPosition(x, y + alpha.asMilliseconds() / 1000.0f * 2);
     }
     SacMan(const int _speed, const int _maxSpeed, const int _points)
     {

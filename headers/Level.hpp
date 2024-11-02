@@ -56,13 +56,14 @@ public:
                 }
                 if(sketch[i][j] == 'P')
                 {
-                    ig_SacMan.SetPosition(i, j);
+                    ig_SacMan.SetPosition(j, i);
                 }
             }
         }
         return ig_level;
     }
-    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, SacMan& ig_SacMan)
+
+    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> &ig_level, sf::RenderWindow& window, SacMan& ig_SacMan)
     {
         unsigned int width = window.getSize().x;
         float CELL_SIZE = static_cast<float>(width) / MAP1_WIDTH;
@@ -78,12 +79,9 @@ public:
                     cell.setFillColor(sf::Color::Blue);
                     window.draw(cell);
                 }
-                if(static_cast<int>(ig_SacMan.GetPosition().x) == j && static_cast<int>(ig_SacMan.GetPosition().y) == i)
-                {
-                    character.setPosition(static_cast<float>(i) * CELL_SIZE, static_cast<float>(j) * CELL_SIZE);
-                    character.setFillColor(sf::Color::Yellow);
-                    window.draw(character);
-                }
+                character.setPosition(ig_SacMan.GetPosition().x * CELL_SIZE, ig_SacMan.GetPosition().y * CELL_SIZE);
+                character.setFillColor(sf::Color::Yellow);
+                window.draw(character);
             }
         }
     }

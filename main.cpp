@@ -20,6 +20,7 @@ int main()
   window.setFramerateLimit(60);
   SacMan ig_SacMan{5, 10, 0};
   array<array<unsigned char, 21>, 21> ig_map = Level::ConvertSketch(1, ig_SacMan);
+  bool dir[4];
   while (window.isOpen())
   {
     sf::Time elapsed = clock.restart();
@@ -31,9 +32,27 @@ int main()
         window.close();
     }
 
-
-    ig_SacMan.Update(elapsed);cout << ig_SacMan.GetPosition().x << endl;
     window.clear(sf::Color::Black);
+
+    if(ig_map[static_cast<int>(ig_SacMan.GetPosition().y)][static_cast<int>(ig_SacMan.GetPosition().x) - 1] == '1') // stanga
+      dir[0] = true;
+    else
+      dir[0] = false;
+    if(ig_map[static_cast<int>(ig_SacMan.GetPosition().y)][static_cast<int>(ig_SacMan.GetPosition().x + 1)] == '1') // dreapta
+      dir[1] = true;
+    else
+      dir[1] = false;
+    if(ig_map[static_cast<int>(ig_SacMan.GetPosition().y) - 1][static_cast<int>(ig_SacMan.GetPosition().x)] == '1') // jos
+      dir[2] = true;
+    else
+      dir[2] = false;
+    if(ig_map[static_cast<int>(ig_SacMan.GetPosition().y) + 1][static_cast<int>(ig_SacMan.GetPosition().x)] == '1') // sus
+      dir[3] = true;
+    else
+      dir[3] = false;
+    cout << ig_map[static_cast<int>(ig_SacMan.GetPosition().y)][static_cast<int>(ig_SacMan.GetPosition().x)] << " " << static_cast<int>(ig_SacMan.GetPosition().x) << " " << static_cast<int>(ig_SacMan.GetPosition().y) << endl;
+    //cout << dir[0] << " " << dir[1] << " " << dir[2] << " " << dir[3] << endl;
+    ig_SacMan.Update(elapsed, dir);
     Level::DrawMap(ig_map, window, ig_SacMan);
     window.display();
   }
