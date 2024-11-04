@@ -1,37 +1,39 @@
 #pragma once
-#include <array>
-#include <string>
+
+#include "Global.hpp"
 
 using namespace std;
 
 class SacMan
 {
-    int speed, maxSpeed, points;
-    float x, y;
+    float speed, maxSpeed;
+    int points;
+    int x, y;
 public:
-    void Update(const sf::Time alpha, bool dir[])
+    void Update(const bool dir[])
     {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir[0] == false)
-            SetPosition(x - alpha.asMilliseconds() / 1000.0f * 2, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir[1] == false)
-            SetPosition(x + alpha.asMilliseconds() / 1000.0f * 2, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir[2] == false)
-            SetPosition(x, y - alpha.asMilliseconds() / 1000.0f * 2);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[3] == false)
-            SetPosition(x, y + alpha.asMilliseconds() / 1000.0f * 2);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir[2] == false)
+            SetPosition(x - speed, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir[0] == false)
+            SetPosition(x + speed, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir[3] == false)
+            SetPosition(x, y - speed);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[1] == false)
+            SetPosition(x, y + speed);
     }
-    SacMan(const int _speed, const int _maxSpeed, const int _points)
+    explicit SacMan(const float alpha)
     {
-        speed = _speed;
-        maxSpeed = _maxSpeed;
-        points = _points;
+        speed = alpha * CELL_SIZE * 0.8f;
+        maxSpeed = speed * 2;
+        points = 0;
+        x = y = 0;
     }
-    void SetPosition(const float _x, const float _y)
+    void SetPosition(const int _x, const int _y)
     {
         x = _x;
         y = _y;
     }
-    [[nodiscard]] sf::Vector2<float> GetPosition() const
+    [[nodiscard]] sf::Vector2<int> GetPosition() const
     {
         return {x, y};
     }
