@@ -20,7 +20,6 @@
       <config projectName="oop" targetName="sfml-audio" />
       <config projectName="oop" targetName="sfml-network" />
       <config projectName="oop" targetName="sfml-graphics" />
-      <config projectName="oop" targetName="sfml-main" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,13 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afa8662c-a4b5-4aed-a064-21aee0d54d8c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/headers/Banker.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/Level.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/headers/SacMan.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/Level.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/headers/Level.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/SacMan.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/headers/SacMan.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +47,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
@@ -105,11 +102,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.oop">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="oop" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="oop" TARGET_NAME="oop" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="oop" RUN_TARGET_NAME="oop">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -121,11 +113,6 @@
       </method>
     </configuration>
     <configuration name="sfml-graphics" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="oop" TARGET_NAME="sfml-graphics" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="sfml-main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="oop" TARGET_NAME="sfml-main" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -149,7 +136,6 @@
       <item itemvalue="CMake Application.oop" />
       <item itemvalue="CMake Application.sfml-audio" />
       <item itemvalue="CMake Application.sfml-graphics" />
-      <item itemvalue="CMake Application.sfml-main" />
       <item itemvalue="CMake Application.sfml-network" />
       <item itemvalue="CMake Application.sfml-system" />
       <item itemvalue="CMake Application.sfml-window" />
@@ -179,6 +165,9 @@
       <workItem from="1729853532235" duration="1546000" />
       <workItem from="1729856692954" duration="9568000" />
       <workItem from="1730221063076" duration="6590000" />
+      <workItem from="1730384209671" duration="5574000" />
+      <workItem from="1730716028737" duration="11325000" />
+      <workItem from="1730989653754" duration="4869000" />
     </task>
     <servers />
   </component>

@@ -1,27 +1,45 @@
 #pragma once
-#include <array>
-#include <string>
+
+#include "Global.hpp"
 
 using namespace std;
 
 class SacMan
 {
-    int speed, maxSpeed, points, x, y;
+    int speed, maxSpeed;
+    int points;
+    int x, y;
 public:
-    SacMan(const int _speed, const int _maxSpeed, const int _points)
+    void Update(const bool dir[])
     {
-        speed = _speed;
-        maxSpeed = _maxSpeed;
-        points = _points;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir[2] == false)
+            SetPosition(x - speed, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir[0] == false)
+            SetPosition(x + speed, y);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir[3] == false)
+            SetPosition(x, y - speed);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[1] == false)
+            SetPosition(x, y + speed);
+    }
+    explicit SacMan()
+    {
+        speed = 2;
+        maxSpeed = speed * 2;
+        points = 0;
+        x = y = 0;
     }
     void SetPosition(const int _x, const int _y)
     {
         x = _x;
         y = _y;
     }
-    static sf::Vector2<int> GetPosition(SacMan& ig_SacMan)
+    void IncrementPoints()
     {
-        return {ig_SacMan.x, ig_SacMan.y};
+        points += 50;
+    }
+    [[nodiscard]] sf::Vector2<int> GetPosition() const
+    {
+        return {x, y};
     }
     friend std::ostream& operator<<(std::ostream& stream, const SacMan& Sac)
     {

@@ -58,6 +58,7 @@ add_executable(${PROJECT_NAME}
         headers/SacMan.hpp
         headers/Banker.hpp
         headers/Level.hpp
+        headers/Global.hpp
 )
 
 include(cmake/CompilerFlags.cmake)
