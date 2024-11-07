@@ -6,7 +6,7 @@ using namespace std;
 
 class SacMan
 {
-    float speed, maxSpeed;
+    int speed, maxSpeed;
     int points;
     int x, y;
 public:
@@ -21,9 +21,9 @@ public:
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[1] == false)
             SetPosition(x, y + speed);
     }
-    explicit SacMan(const float alpha)
+    explicit SacMan()
     {
-        speed = alpha * CELL_SIZE * 0.8f;
+        speed = 2;
         maxSpeed = speed * 2;
         points = 0;
         x = y = 0;
@@ -32,6 +32,10 @@ public:
     {
         x = _x;
         y = _y;
+    }
+    void IncrementPoints()
+    {
+        points += 50;
     }
     [[nodiscard]] sf::Vector2<int> GetPosition() const
     {

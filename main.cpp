@@ -11,10 +11,10 @@ using namespace std;
 
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(840, 840), "SacMan", sf::Style::Close | sf::Style::Titlebar);
+  sf::RenderWindow window(sf::VideoMode(1200, 840), "SacMan", sf::Style::Close | sf::Style::Titlebar);
   sf::Clock clock;
   window.setFramerateLimit(FRAME_RATE);
-  SacMan ig_SacMan{FRAME_RATE / 1000.0f};
+  SacMan ig_SacMan{};
   bool dir[4];
   array<array<unsigned char, MAP1_HEIGHT>, MAP1_WIDTH> ig_map = Level::ConvertSketch(1, ig_SacMan);
   for(int i = 0; i < MAP1_HEIGHT; i++)
@@ -34,10 +34,10 @@ int main()
     }
 
     window.clear(sf::Color::Black);
-    dir[0] = Level::CheckCollision(ig_map, ig_SacMan.GetPosition().x + 1, ig_SacMan.GetPosition().y);
-    dir[1] = Level::CheckCollision(ig_map, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y + 1);
-    dir[2] = Level::CheckCollision(ig_map, ig_SacMan.GetPosition().x - 1, ig_SacMan.GetPosition().y);
-    dir[3] = Level::CheckCollision(ig_map, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y - 1);
+    dir[0] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x + 2, ig_SacMan.GetPosition().y);
+    dir[1] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y + 2);
+    dir[2] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x - 2, ig_SacMan.GetPosition().y);
+    dir[3] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y - 2);
     cout << endl;
     ig_SacMan.Update(dir);
     Level::DrawMap(ig_map, window, ig_SacMan);
