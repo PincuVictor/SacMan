@@ -2,13 +2,13 @@
 
 ## Descriere
 Un joc total nou si original, SacMan! In acest joc controlezi un saculet de bani numit SacMan, acesta se afla in
-diferite labirinturi pline de banuti. Scopul jocului este sa colectezii toate monedele din labirint. Labirintul nu
+diferite labirinturi pline de banuti. Scopul jocului este sa colectezi toate monedele din labirint. Labirintul nu
 este lipsit de amenintari, in labirint se afla si patru bancheri care se plimba prin labirint si incearca sa-l opreasca
 pe SacMan din a colecta toti banii.
 
-## Nivelele
-Fiecare nivel are un labirint predefinit, nivelele ulterioare avand labirinturi mai mare si mai intortocheate,
-de asemenea, toti bancherii fiind mai rapizi. A progresa prin nivele nu vine doar cu dezavantaje acestea avand mai
+## Nivelurile
+Fiecare nivel are un labirint predefinit, nivelurile ulterioare avand labirinturi mai mari si mai intortocheate,
+de asemenea, toti bancherii fiind mai rapizi. A progresa prin niveluri nu vine doar cu dezavantaje acestea avand mai
 multe Powerup-uri care pot fi folosite de SacMan.
 
 ## SacMan

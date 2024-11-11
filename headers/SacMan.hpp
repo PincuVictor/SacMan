@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Global.hpp"
-
 using namespace std;
 
 class SacMan

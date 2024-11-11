@@ -1,22 +1,24 @@
 #include <iostream>
 #include <array>
 #include <Helper.h>
-#include <chrono>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "headers/SacMan.hpp"
 #include "headers/Level.hpp"
+#include "headers/Banker.hpp"
+#include "headers/MapCollisions.hpp"
 
 using namespace std;
 
 int main()
 {
   sf::RenderWindow window(sf::VideoMode(1200, 840), "SacMan", sf::Style::Close | sf::Style::Titlebar);
-  sf::Clock clock;
   window.setFramerateLimit(FRAME_RATE);
   SacMan ig_SacMan{};
+  Banker Banker{};
   bool dir[4];
-  array<array<unsigned char, MAP1_HEIGHT>, MAP1_WIDTH> ig_map = Level::ConvertSketch(1, ig_SacMan);
+  int oppDir = 1;
+  array<array<unsigned char, MAP1_HEIGHT>, MAP1_WIDTH> ig_map = Level::ConvertSketch(1, ig_SacMan, Banker);
   for(int i = 0; i < MAP1_HEIGHT; i++)
   {
     for(int j = 0; j < MAP1_WIDTH; j++)
@@ -32,15 +34,16 @@ int main()
       if (event.type == sf::Event::Closed)
         window.close();
     }
-
     window.clear(sf::Color::Black);
-    dir[0] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x + 2, ig_SacMan.GetPosition().y);
-    dir[1] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y + 2);
-    dir[2] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x - 2, ig_SacMan.GetPosition().y);
-    dir[3] = Level::CheckCollision(ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y - 2);
+    MapCollisions::CheckCollision(true, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y);
+    dir[0] = MapCollisions::CheckCollision(false, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x + 2, ig_SacMan.GetPosition().y);
+    dir[1] = MapCollisions::CheckCollision(false, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y + 2);
+    dir[2] = MapCollisions::CheckCollision(false, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x - 2, ig_SacMan.GetPosition().y);
+    dir[3] = MapCollisions::CheckCollision(false, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y - 2);
     cout << endl;
     ig_SacMan.Update(dir);
-    Level::DrawMap(ig_map, window, ig_SacMan);
+    Banker.UpdateG(ig_map, ig_SacMan, oppDir);
+    Level::DrawMap(ig_map, window, ig_SacMan, Banker);
     window.display();
   }
 
