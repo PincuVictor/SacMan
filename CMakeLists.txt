@@ -68,6 +68,7 @@ add_executable(${PROJECT_NAME}
 include(cmake/CompilerFlags.cmake)
 
 ###############################################################################
+set(CMAKE_FIND_PACKAGE_WARN_ONLY TRUE)
 
 find_package(X11)
 if(X11_FOUND)
@@ -83,6 +84,7 @@ if(OPENGL_FOUND)
 else ()
     find_package(Mesa3D)
 endif()
+set(CMAKE_FIND_PACKAGE_WARN_ONLY FALSE)
 
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
