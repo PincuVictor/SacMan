@@ -35,4 +35,4 @@ runs:
       if: runner.os == 'Linux' && matrix.runs_valgrind == true
       run: |
         # sudo apt-get update
-        sudo apt-get install --no-install-recommends valgrind
+        sudo apt-get install --no-install-recommends valgrindsudo apt install mesa

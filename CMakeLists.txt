@@ -68,8 +68,9 @@ add_executable(${PROJECT_NAME}
 include(cmake/CompilerFlags.cmake)
 
 ###############################################################################
+
 find_package(X11)
-if(APPLE AND X11_FOUND)
+if(X11_FOUND)
     set(CMAKE_FIND_FRAMEWORK NEVER)
     set(OpenGL_GL_PREFERENCE GLX)
     find_package(OpenGL)
@@ -78,6 +79,10 @@ else()
     set(OpenGL_GL_PREFERENCE GLVND)
     find_package(OpenGL)
 endif()
+if(!(OPENGL_FOUND))
+    find_package(Mesa3D)
+endif()
+
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)

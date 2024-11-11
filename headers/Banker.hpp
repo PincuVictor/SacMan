@@ -12,7 +12,6 @@ using namespace std;
 class Banker
 {
     int speed, x{}, y{};
-    bool useDoor = false;
 public:
     /// șpârga, șmârga, șbungu, șmungu
     /// cand incep sa urmareasca sacu "ai-u" e ca se verifica cat ar fi distanta pana la sac daca ar lua o in fiecare din directiile posibile
