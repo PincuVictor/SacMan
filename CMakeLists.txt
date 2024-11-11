@@ -54,11 +54,15 @@ add_executable(${PROJECT_NAME}
         main.cpp
         generated/src/Helper.cpp
         env_fixes.h
-        env_fixes.h
         headers/SacMan.hpp
         headers/Banker.hpp
         headers/Level.hpp
         headers/Global.hpp
+        headers/Sparga.hpp
+        headers/Smarga.hpp
+        headers/Sbungu.hpp
+        headers/Smungu.hpp
+        headers/MapCollisions.hpp
 )
 
 include(cmake/CompilerFlags.cmake)
@@ -67,9 +71,11 @@ include(cmake/CompilerFlags.cmake)
 find_package(X11)
 if(APPLE AND X11_FOUND)
     set(CMAKE_FIND_FRAMEWORK NEVER)
+    set(OpenGL_GL_PREFERENCE GLVND)
     find_package(OpenGL)
     unset(CMAKE_FIND_FRAMEWORK)
 else()
+    set(OpenGL_GL_PREFERENCE GLVND)
     find_package(OpenGL)
 endif()
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories

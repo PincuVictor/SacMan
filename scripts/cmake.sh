@@ -122,4 +122,3 @@ case "$1" in
         install\n" "${opt}"
       exit 1
 esac
-
