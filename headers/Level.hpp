@@ -13,32 +13,10 @@ class Level
 public:
     static array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ConvertSketch(const int lvl, SacMan& ig_SacMan, Banker& ig_Banker)
     {
-        array<string, MAP1_HEIGHT> sketch{};
+        array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> sketch{};
         if(lvl == 1)
         {
-            sketch = {
-                " ################### ",
-                " #........#........# ",
-                " #.##.###.#.###.##.# ",
-                " #.................# ",
-                " #.##.#.#####.#.##.# ",
-                " #....#...#...#....# ",
-                " ####.###.#.###.#### ",
-                "    #.#.......#.#    ",
-                "#####.#.##=##.#.#####",
-                "........# F #........",
-                "#####.#.#####.#.#####",
-                "    #.#.......#.#    ",
-                " ####.#.#####.#.#### ",
-                " #........#........# ",
-                " #.##.###.#.###.##.# ",
-                " #..#.....P.....#..# ",
-                " ##.#.#.#####.#.#.## ",
-                " #....#...#...#....# ",
-                " #.######.#.######.# ",
-                " #.................# ",
-                " ################### "
-                };
+
         }
         array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level{};
         for (int i = 0; i < MAP1_HEIGHT; i++)
