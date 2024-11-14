@@ -41,7 +41,7 @@ int main()
     }
     window.clear(sf::Color::Black);
     ig_SacMan.Update(map);
-    Banker.UpdateG(map.GetMap(1), ig_SacMan, oppDir);
+    //Banker.UpdateG(map.GetMap(1), ig_SacMan, oppDir);
     Level::DrawMap(map.GetMap(1), window, ig_SacMan, Banker);
     window.display();
   }

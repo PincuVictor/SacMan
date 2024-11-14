@@ -20,7 +20,7 @@ public:
     /// smungu e cretin se plimba random nu fugareste
     /// clase derivate prin mostenire de la banker
 
-    void UpdateG(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, SacMan &ig_SacMan, int &oppDir)
+    /*void UpdateG(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, SacMan &ig_SacMan, int &oppDir)
     {
         int r;
         if(sqrt(pow(abs(x + 2 - ig_SacMan.GetPosition().x), 2) + pow(abs(y - ig_SacMan.GetPosition().y), 2)) < 10)
@@ -47,7 +47,7 @@ public:
                 oppDir = 1;
             }
         }
-        else
+        /*else
         {
             //r = Chase(ig_level, ig_SacMan);
             switch(r)
@@ -66,7 +66,7 @@ public:
             default: ;
             }
         }
-    }
+    }*/
     /*int Chase(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, SacMan &ig_SacMan) const
     {
         int dir = -1;

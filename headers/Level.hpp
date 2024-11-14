@@ -11,7 +11,7 @@ using namespace std;
 class Level
 {
 public:
-    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, SacMan& ig_SacMan, Banker& ig_Banker)
+    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const Banker& ig_Banker)
     {
         sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
         sf::CircleShape character(static_cast<float>(CELL_SIZE) / 2);
