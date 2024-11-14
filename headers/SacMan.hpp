@@ -1,4 +1,6 @@
 #pragma once
+#include "Global.hpp"
+#include "Map.hpp"
 
 using namespace std;
 
@@ -8,16 +10,25 @@ class SacMan
     int points;
     int x, y;
 public:
-    void Update(const bool dir[])
+    void Update(Map &map)
     {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && dir[2] == false)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && map.CheckCollision(false, false, x - speed, y) == false)
             SetPosition(x - speed, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && dir[0] == false)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && map.CheckCollision(false, false, x + speed, y) == false)
             SetPosition(x + speed, y);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && dir[3] == false)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && map.CheckCollision(false, false, x, y - speed) == false)
             SetPosition(x, y - speed);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && dir[1] == false)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map.CheckCollision(false, false, x, y + speed) == false)
             SetPosition(x, y + speed);
+        IncrementPoints(map);
+        if (-CELL_SIZE >= x)
+        {
+            x = CELL_SIZE * MAP1_WIDTH - 2;
+        }
+        else if (CELL_SIZE * MAP1_WIDTH <= x)
+        {
+            x = 2 - CELL_SIZE;
+        }
     }
     explicit SacMan()
     {
@@ -31,9 +42,10 @@ public:
         x = _x;
         y = _y;
     }
-    void IncrementPoints()
+    void IncrementPoints(Map &map)
     {
-        points += 50;
+        if(map.CheckCollision(true, false, x, y) == true)
+            points += 50;
     }
     [[nodiscard]] sf::Vector2<int> GetPosition() const
     {
