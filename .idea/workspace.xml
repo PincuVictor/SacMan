@@ -28,12 +28,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afa8662c-a4b5-4aed-a064-21aee0d54d8c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/Banker.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/headers/Banker.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/headers/Level.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/headers/Level.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="afa8662c-a4b5-4aed-a064-21aee0d54d8c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +177,7 @@
       <workItem from="1731142380462" duration="6278000" />
       <workItem from="1731168292446" duration="5212000" />
       <workItem from="1731325747419" duration="6240000" />
-      <workItem from="1731586397998" duration="9607000" />
+      <workItem from="1731586397998" duration="9727000" />
     </task>
     <servers />
   </component>
