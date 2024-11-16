@@ -42,7 +42,7 @@ int main()
     dir[3] = MapCollisions::CheckCollision(false, false, ig_map, ig_SacMan, ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y - 2);
     cout << endl;
     ig_SacMan.Update(dir);
-    Banker.UpdateG(ig_map, ig_SacMan, oppDir);
+    //Banker.UpdateG(ig_map, ig_SacMan, oppDir);
     Level::DrawMap(ig_map, window, ig_SacMan, Banker);
     window.display();
   }
