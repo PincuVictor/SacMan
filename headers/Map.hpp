@@ -41,6 +41,7 @@ class Map
     {
         if(lvl == 1)
             return map1;
+        return map1;
     }
 
     bool CheckCollision(const bool checkCollectables, const bool useDoor, int x, int y)

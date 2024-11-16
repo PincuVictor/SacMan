@@ -47,7 +47,7 @@ public:
                 oppDir = 1;
             }
         }
-        /*else
+        else
         {
             //r = Chase(ig_level, ig_SacMan);
             switch(r)
