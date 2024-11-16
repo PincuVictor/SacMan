@@ -11,72 +11,7 @@ using namespace std;
 class Level
 {
 public:
-    static array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ConvertSketch(const int lvl, SacMan& ig_SacMan, Banker& ig_Banker)
-    {
-        array<string, MAP1_HEIGHT> sketch{};
-        if(lvl == 1)
-        {
-            sketch = {
-                " ################### ",
-                " #........#........# ",
-                " #.##.###.#.###.##.# ",
-                " #.................# ",
-                " #.##.#.#####.#.##.# ",
-                " #....#...#...#....# ",
-                " ####.###.#.###.#### ",
-                "    #.#.......#.#    ",
-                "#####.#.##=##.#.#####",
-                "........# F #........",
-                "#####.#.#####.#.#####",
-                "    #.#.......#.#    ",
-                " ####.#.#####.#.#### ",
-                " #........#........# ",
-                " #.##.###.#.###.##.# ",
-                " #..#.....P.....#..# ",
-                " ##.#.#.#####.#.#.## ",
-                " #....#...#...#....# ",
-                " #.######.#.######.# ",
-                " #.................# ",
-                " ################### "
-                };
-        }
-        array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level{};
-        for (int i = 0; i < MAP1_HEIGHT; i++)
-        {
-            for (int j = 0; j < MAP1_WIDTH; j++)
-            {
-                if (sketch[i][j] == '#')
-                {
-                    ig_level[i][j] = '1';
-                }
-                if(sketch[i][j] == ' ')
-                {
-                    ig_level[i][j] = '0';
-                }
-                if(sketch[i][j] == '.')
-                {
-                    ig_level[i][j] = '2';
-                }
-                if(sketch[i][j] == 'P')
-                {
-                    ig_level[i][j] = '0';
-                    ig_SacMan.SetPosition(j * CELL_SIZE, i * CELL_SIZE);
-                }
-                if(sketch[i][j] == 'F')
-                {
-                    ig_level[i][j] = '0';
-                    ig_Banker.SetPosition(j * CELL_SIZE, i * CELL_SIZE);
-                }
-                if(sketch[i][j] == '=')
-                {
-                    ig_level[i][j] = '3';
-                }
-            }
-        }
-        return ig_level;
-    }
-
-    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> &ig_level, sf::RenderWindow& window, SacMan& ig_SacMan, Banker& ig_Banker)
+    static void DrawMap(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const Banker& ig_Banker)
     {
         sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
         sf::CircleShape character(static_cast<float>(CELL_SIZE) / 2);
