@@ -66,7 +66,7 @@ public:
             default: ;
             }
         }
-    }
+    }*/
     /*int Chase(array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, SacMan &ig_SacMan) const
     {
         int dir = -1;
