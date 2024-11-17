@@ -22,14 +22,14 @@ class Smungu : public Banker
                 availableWays++;
         random_device rd;
         mt19937 mt(rd());
-        uniform_int_distribution<int8_t> dirR(0, 3);
+        uniform_int_distribution<short> dirR(0, 3);
         GetOut();
         if(GetTarget().x == -1 && GetTarget().y == -1)
         {
             bool selected = false;
             if(availableWays == 2)
             {
-                if(dir == 0 && ways[0] == true && selected == false)
+                if(dir == 0 && ways[0] == true)
                 {
                     dir = dirR(mt);
                     while(dir == 0 || dir == 1 || ways[dir] == true)
@@ -80,7 +80,6 @@ class Smungu : public Banker
             }
             if(availableWays >= 3)
             {
-                bool selected = false;
                 if(dir == 0 && selected == false)
                 {
                     dir = dirR(mt);

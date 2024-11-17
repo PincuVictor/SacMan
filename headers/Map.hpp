@@ -19,8 +19,7 @@ class Map
         {
             for (int j = 0; j < MAP1_HEIGHT; j++)
             {
-                unsigned char c = '\0';
-                c = static_cast<unsigned char>(in.get());
+                const auto c = static_cast<unsigned char>(in.get());
                 if(c == ' ' || c == '\n' || c == '|')
                     map1[i][j] = '0';
                 if(c == '#')

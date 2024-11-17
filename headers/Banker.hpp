@@ -59,6 +59,8 @@ public:
     }
     Banker& operator=(const Banker& other)
     {
+        targetx = other.targetx;
+        targety = other.targety;
         speed = other.speed;
         x = other.x;
         y = other.y;
