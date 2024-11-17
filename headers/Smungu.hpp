@@ -35,7 +35,6 @@ class Smungu : public Banker
                     while(dir == 0 || dir == 1 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 1 && ways[1] == true && selected == false)
                 {
@@ -43,7 +42,6 @@ class Smungu : public Banker
                     while(dir == 1 || dir == 0 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 2 && ways[2] == true && selected == false)
                 {
@@ -51,7 +49,6 @@ class Smungu : public Banker
                     while(dir == 2 || dir == 3 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 3 && ways[3] == true && selected == false)
                 {
@@ -59,7 +56,6 @@ class Smungu : public Banker
                     while(dir == 3 || dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 switch (dir)
                 {
@@ -91,7 +87,6 @@ class Smungu : public Banker
                     while(dir == 0 || dir == 1 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 1 && selected == false)
                 {
@@ -99,7 +94,6 @@ class Smungu : public Banker
                     while(dir == 1 || dir == 0 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 2 && selected == false)
                 {
@@ -107,7 +101,6 @@ class Smungu : public Banker
                     while(dir == 2 || dir == 3 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 if(dir == 3 && selected == false)
                 {
@@ -115,7 +108,6 @@ class Smungu : public Banker
                     while(dir == 3 || dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
-                    cout << dir << endl;
                 }
                 switch (dir)
                 {
