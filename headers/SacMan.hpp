@@ -58,8 +58,15 @@ public:
         stream << "Points: " << Sac.points << '\n';
         return stream;
     }
-    SacMan& operator=(const SacMan& Sac)
-      = default;
+    SacMan& operator=(const SacMan& other)
+    {
+        speed = other.speed;
+        maxSpeed = other.maxSpeed;
+        points = other.points;
+        x = other.x;
+        y = other.y;
+        return *this;
+    }
     ~SacMan() = default;
 
 
