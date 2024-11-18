@@ -2,8 +2,6 @@
 #include "Global.hpp"
 #include "Map.hpp"
 
-using namespace std;
-
 class SacMan
 {
     int speed, maxSpeed;
@@ -36,6 +34,14 @@ public:
         maxSpeed = speed * 2;
         points = 0;
         x = y = 0;
+    }
+    SacMan(const SacMan &other)
+    {
+        speed = other.speed;
+        maxSpeed = other.maxSpeed;
+        points = other.points;
+        x = other.x;
+        y = other.y;
     }
     void SetPosition(const int _x, const int _y)
     {
