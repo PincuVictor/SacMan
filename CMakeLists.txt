@@ -55,6 +55,12 @@ add_executable(${PROJECT_NAME}
         generated/src/Helper.cpp
         env_fixes.h
         headers/Map.hpp
+        headers/SacMan.hpp
+        headers/Engine.hpp
+        headers/Level.hpp
+        headers/Global.hpp
+        headers/Banker.hpp
+        headers/Smungu.hpp
 )
 
 include(cmake/CompilerFlags.cmake)

@@ -11,8 +11,7 @@ inline ifstream in("../configs/map1");
 
 class Map
 {
-    array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> map1;
-
+    array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> map1{};
     public:
     Map()
     {
@@ -20,7 +19,7 @@ class Map
         {
             for (int j = 0; j < MAP1_HEIGHT; j++)
             {
-                char c = in.get();
+                const auto c = static_cast<unsigned char>(in.get());
                 if(c == ' ' || c == '\n' || c == '|')
                     map1[i][j] = '0';
                 if(c == '#')
@@ -37,10 +36,11 @@ class Map
         }
     }
 
-    array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> GetMap(int lvl)
+    [[nodiscard]] array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> GetMap(const int lvl) const
     {
         if(lvl == 1)
             return map1;
+        return map1;
     }
 
     bool CheckCollision(const bool checkCollectables, const bool useDoor, int x, int y)
