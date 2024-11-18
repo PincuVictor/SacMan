@@ -3,8 +3,6 @@
 #include "Map.hpp"
 #include <random>
 
-using namespace std;
-
 class Smungu : public Banker
 {
     int dir = 0;
@@ -20,9 +18,9 @@ class Smungu : public Banker
         for(const bool way : ways)
             if(way == false)
                 availableWays++;
-        random_device rd;
-        mt19937 mt(rd());
-        uniform_int_distribution<short> dirR(0, 3);
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_int_distribution<short> dirR(0, 3);
         GetOut();
         if(GetTarget().x == -1 && GetTarget().y == -1)
         {
@@ -106,7 +104,6 @@ class Smungu : public Banker
                     dir = dirR(mt);
                     while(dir == 3 || dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
-                    selected = true;
                 }
                 switch (dir)
                 {

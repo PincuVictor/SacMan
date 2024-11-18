@@ -5,16 +5,13 @@
 
 #include "Global.hpp"
 
-using namespace std;
-
-inline ifstream in("../configs/map1");
-
 class Map
 {
-    array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> map1{};
+    std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> map1{};
     public:
     Map()
     {
+        std::ifstream in("configs/map1");
         for (int i = 0; i < MAP1_WIDTH; i++)
         {
             for (int j = 0; j < MAP1_HEIGHT; j++)
@@ -36,7 +33,7 @@ class Map
         }
     }
 
-    [[nodiscard]] array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> GetMap(const int lvl) const
+    [[nodiscard]] std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> GetMap(const int lvl) const
     {
         if(lvl == 1)
             return map1;
@@ -54,26 +51,26 @@ class Map
             {
             case 0:
                 {
-                    x = floor(cell_x);
-                    y = floor(cell_y);
+                    x = std::floor(cell_x);
+                    y = std::floor(cell_y);
                     break;
                 }
             case 1:
                 {
-                    x = ceil(cell_x);
-                    y = floor(cell_y);
+                    x = std::ceil(cell_x);
+                    y = std::floor(cell_y);
                     break;
                 }
             case 2:
                 {
-                    x = floor(cell_x);
-                    y = ceil(cell_y);
+                    x = std::floor(cell_x);
+                    y = std::ceil(cell_y);
                     break;
                 }
             case 3:
                 {
-                    x = ceil(cell_x);
-                    y = ceil(cell_y);
+                    x = std::ceil(cell_x);
+                    y = std::ceil(cell_y);
                     break;
                 }
             default: break;

@@ -1,12 +1,7 @@
 #pragma once
-#include <array>
 #include <iostream>
-#include <cmath>
 #include <random>
 #include "Global.hpp"
-#include "SacMan.hpp"
-
-using namespace std;
 
 class Banker
 {
@@ -51,6 +46,15 @@ public:
     Banker()
     {
         speed = 2;
+    }
+    Banker(const Banker& other)
+    {
+        speed = other.speed;
+        x = other.x;
+        y = other.y;
+        targetx = other.targetx;
+        targety = other.targety;
+        useDoor = other.useDoor;
     }
     friend std::ostream& operator<<(std::ostream& stream, const Banker& G)
     {

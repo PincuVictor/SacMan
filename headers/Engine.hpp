@@ -12,7 +12,7 @@ class Engine
     SacMan ig_SacMan{};
     Smungu ig_Smungu{};
     sf::RenderWindow& window;
-    array<array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_map{};
+    std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_map{};
     public:
         explicit Engine(sf::RenderWindow &gameWindow) : window(gameWindow)
         {
