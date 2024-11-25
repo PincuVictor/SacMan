@@ -35,13 +35,9 @@ public:
         points = 0;
         x = y = 0;
     }
-    SacMan(const SacMan &other)
+    SacMan(const SacMan &other) : speed(other.speed), maxSpeed(other.maxSpeed), points(other.points), x(other.x), y(other.y)
     {
-        speed = other.speed;
-        maxSpeed = other.maxSpeed;
-        points = other.points;
-        x = other.x;
-        y = other.y;
+
     }
     void SetPosition(const int _x, const int _y)
     {
@@ -62,6 +58,8 @@ public:
         stream << "Speed: " << Sac.speed << '\n';
         stream << "Max Speed: " << Sac.maxSpeed << '\n';
         stream << "Points: " << Sac.points << '\n';
+        stream << "X: " << Sac.x << '\n';
+        stream << "Y: " << Sac.y << '\n';
         return stream;
     }
     SacMan& operator=(const SacMan& other)

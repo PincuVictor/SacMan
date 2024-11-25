@@ -1,16 +1,15 @@
 #pragma once
 #include "SacMan.hpp"
-#include "Banker.hpp"
+#include "BankerManager.hpp"
 #include <array>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Global.hpp"
-#include "Smungu.hpp"
 
 class Level
 {
 public:
-    static void DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const Smungu& ig_Smungu)
+    static void DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const BankerManager& ig_BankerManager)
     {
         sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
         sf::CircleShape character(static_cast<float>(CELL_SIZE) / 2);
@@ -39,7 +38,7 @@ public:
                     cell.setFillColor(sf::Color::Red);
                     window.draw(cell);
                 }
-                banker.setPosition(static_cast<float>(ig_Smungu.GetPosition().x), static_cast<float>(ig_Smungu.GetPosition().y));
+                banker.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
                 banker.setFillColor(sf::Color::Green);
                 window.draw(banker);
                 character.setPosition(static_cast<float>(ig_SacMan.GetPosition().x), static_cast<float>(ig_SacMan.GetPosition().y));

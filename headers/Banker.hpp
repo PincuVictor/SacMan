@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include "Global.hpp"
+#include "Map.hpp"
 
 class Banker
 {
@@ -15,6 +16,14 @@ public:
     /// sbungu isi alege un colt al hartii pana in care se duce, cand ajunge acolo isi alege altu, fugareste in apropiere
     /// smungu se plimba random nu fugareste
     /// clase derivate prin mostenire de la banker
+
+    virtual void Update(Map &map) = 0;
+
+    virtual void SetTarget(const int _x, const int _y)
+    {
+        targetx = _x;
+        targety = _y;
+    }
 
     void GetOut()
     {
@@ -38,27 +47,24 @@ public:
     {
         return {targetx, targety};
     }
-    void SetTarget(const int _x, const int _y)
-    {
-        targetx = _x;
-        targety = _y;
-    }
+
     Banker()
     {
         speed = 2;
     }
-    Banker(const Banker& other)
+    Banker(const Banker& other) : speed(other.speed), x(other.x), y(other.y), targetx(other.x), targety(other.y), useDoor(other.useDoor)
     {
-        speed = other.speed;
-        x = other.x;
-        y = other.y;
-        targetx = other.targetx;
-        targety = other.targety;
-        useDoor = other.useDoor;
+
     }
+
     friend std::ostream& operator<<(std::ostream& stream, const Banker& G)
     {
         stream << "Speed: " << G.speed << '\n';
+        stream << "X: " << G.x << '\n';
+        stream << "Y: " << G.y << '\n';
+        stream << "Target X: " << G.targetx << '\n';
+        stream << "Target Y: " << G.targety << '\n';
+        stream << "UseDoor: " << G.useDoor << '\n';
         return stream;
     }
     Banker& operator=(const Banker& other)
@@ -70,5 +76,6 @@ public:
         y = other.y;
         return *this;
     }
-    ~Banker() = default;
+
+    virtual ~Banker() = default;
 };

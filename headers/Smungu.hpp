@@ -2,12 +2,13 @@
 #include "Banker.hpp"
 #include "Map.hpp"
 #include <random>
+#include <iostream>
 
 class Smungu : public Banker
 {
     int dir = 0;
     public:
-    void Update(Map &map)
+    void Update(Map &map) override
     {
         bool ways[4];
         int availableWays = 0;
@@ -137,4 +138,5 @@ class Smungu : public Banker
             }
         }
     }
+
 };
