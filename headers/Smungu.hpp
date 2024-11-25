@@ -139,10 +139,4 @@ class Smungu : public Banker
         }
     }
 
-    void ChooseSector(Map& map) override
-    {
-        std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> map1{};
-        std::cout << "Nu selecteaza sector";
-        map1 = map.GetMap(1);
-    }
 };

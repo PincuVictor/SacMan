@@ -19,8 +19,6 @@ public:
 
     virtual void Update(Map &map) = 0;
 
-    virtual void ChooseSector(Map &map) = 0;
-
     virtual void SetTarget(const int _x, const int _y)
     {
         targetx = _x;
