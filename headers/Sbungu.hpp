@@ -47,7 +47,6 @@ class Sbungu : public Banker
                     timerClock.restart();
                     elapsedTime = 0;
                     SetTarget(-1, -1);
-                    chasingSac = false;
                 }
                 Chase(map);
             }

@@ -158,7 +158,7 @@ class Smungu : public Banker
         }
     }
 
-    void Chase(Map &map)
+    void Chase(Map &map) override
     {
         bool ways[4];
         int availableWays = 0, selected = 0;
