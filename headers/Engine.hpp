@@ -32,7 +32,7 @@ class Engine
         void Update()
         {
             ig_SacMan.Update(map);
-            ig_BankerManager.CallUpdate(map);
+            ig_BankerManager.CallUpdate(map, ig_SacMan);
             Level::DrawMap(this->map.GetMap(1), window, ig_SacMan, ig_BankerManager);
         }
     friend std::ostream& operator<<(std::ostream& stream, const Engine& engine)

@@ -14,7 +14,8 @@ public:
         sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
         sf::CircleShape character(static_cast<float>(CELL_SIZE) / 2);
         sf::CircleShape coin(static_cast<float>(CELL_SIZE) / 5);
-        sf::CircleShape banker(static_cast<float>(CELL_SIZE) / 2);
+        sf::CircleShape smungu(static_cast<float>(CELL_SIZE) / 2);
+        sf::CircleShape sbungu(static_cast<float>(CELL_SIZE) / 2);
 
         for (int i = 0; i < MAP1_HEIGHT; i++)
         {
@@ -38,9 +39,12 @@ public:
                     cell.setFillColor(sf::Color::Red);
                     window.draw(cell);
                 }
-                banker.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
-                banker.setFillColor(sf::Color::Green);
-                window.draw(banker);
+                sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
+                sbungu.setFillColor(sf::Color::Green);
+                window.draw(sbungu);
+                sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().y));
+                sbungu.setFillColor(sf::Color::Red);
+                window.draw(sbungu);
                 character.setPosition(static_cast<float>(ig_SacMan.GetPosition().x), static_cast<float>(ig_SacMan.GetPosition().y));
                 character.setFillColor(sf::Color::Yellow);
                 window.draw(character);

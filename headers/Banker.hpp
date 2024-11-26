@@ -1,8 +1,8 @@
 #pragma once
-#include <iostream>
 #include <random>
 #include "Global.hpp"
 #include "Map.hpp"
+#include "SacMan.hpp"
 
 class Banker
 {
@@ -17,7 +17,9 @@ public:
     /// smungu se plimba random nu fugareste
     /// clase derivate prin mostenire de la banker
 
-    virtual void Update(Map &map) = 0;
+    virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
+
+    virtual void Chase(Map &map) = 0;
 
     virtual void SetTarget(const int _x, const int _y)
     {
