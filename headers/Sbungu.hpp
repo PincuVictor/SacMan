@@ -7,7 +7,6 @@
 class Sbungu : public Banker
 {
     int dir = 0;
-    bool chaseTarget = false;
     sf::Clock timerClock;
     float elapsedTime = 0;
     public:
@@ -58,15 +57,12 @@ class Sbungu : public Banker
     void Chase(Map &map) override
     {
         bool ways[4];
-        int availableWays = 0, selected = 0;
-        double dist = INT_MAX;
+        int selected = 0;
+        double dist = 20000000;
         ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
         ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
         ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
         ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 2);
-        for(const bool way : ways)
-            if(way == false)
-                availableWays++;
         if(ways[0] == false)
         {
             if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
