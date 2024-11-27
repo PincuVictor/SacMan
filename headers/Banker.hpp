@@ -8,6 +8,7 @@ class Banker
 {
     int speed, x{}, y{}, targetx{}, targety{};
     bool useDoor = true;
+
 public:
     /// șpârga, șmârga, șbungu, șmungu
     /// cand incep sa urmareasca sacu "ai-u" e ca se verifica cat ar fi distanta pana la sac daca ar lua o in fiecare din directiile posibile
@@ -18,10 +19,9 @@ public:
     /// clase derivate prin mostenire de la banker
 
     virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
-
     virtual void Chase(Map &map) = 0;
 
-    virtual void SetTarget(const int _x, const int _y)
+    void SetTarget(const int _x, const int _y)
     {
         targetx = _x;
         targety = _y;
@@ -59,14 +59,14 @@ public:
 
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const Banker& G)
+    friend std::ostream& operator<<(std::ostream& stream, const Banker& B)
     {
-        stream << "Speed: " << G.speed << '\n';
-        stream << "X: " << G.x << '\n';
-        stream << "Y: " << G.y << '\n';
-        stream << "Target X: " << G.targetx << '\n';
-        stream << "Target Y: " << G.targety << '\n';
-        stream << "UseDoor: " << G.useDoor << '\n';
+        stream << "Speed: " << B.speed << '\n';
+        stream << "X: " << B.x << '\n';
+        stream << "Y: " << B.y << '\n';
+        stream << "Target X: " << B.targetx << '\n';
+        stream << "Target Y: " << B.targety << '\n';
+        stream << "UseDoor: " << B.useDoor << '\n';
         return stream;
     }
     Banker& operator=(const Banker& other)

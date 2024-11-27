@@ -63,6 +63,7 @@ add_executable(${PROJECT_NAME}
         headers/Smungu.hpp
         headers/Sbungu.hpp
         headers/BankerManager.hpp
+        headers/InitBankers.hpp
 )
 
 include(cmake/CompilerFlags.cmake)

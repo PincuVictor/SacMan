@@ -16,6 +16,8 @@ public:
         sf::CircleShape coin(static_cast<float>(CELL_SIZE) / 5);
         sf::CircleShape smungu(static_cast<float>(CELL_SIZE) / 2);
         sf::CircleShape sbungu(static_cast<float>(CELL_SIZE) / 2);
+        sf::CircleShape sparga(static_cast<float>(CELL_SIZE) / 2);
+        sf::CircleShape smarga(static_cast<float>(CELL_SIZE) / 2);
 
         for (int i = 0; i < MAP1_HEIGHT; i++)
         {
@@ -39,12 +41,18 @@ public:
                     cell.setFillColor(sf::Color::Red);
                     window.draw(cell);
                 }
-                sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
+                sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(0)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(0)->GetPosition().y));
                 sbungu.setFillColor(sf::Color::Green);
                 window.draw(sbungu);
-                sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().y));
-                sbungu.setFillColor(sf::Color::Red);
-                window.draw(sbungu);
+                smungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
+                smungu.setFillColor(sf::Color::Red);
+                window.draw(smungu);
+                sparga.setPosition(static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().y));
+                sparga.setFillColor(sf::Color::Cyan);
+                window.draw(sparga);
+                smarga.setPosition(static_cast<float>(ig_BankerManager.GetBanker(3)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(3)->GetPosition().y));
+                smarga.setFillColor(sf::Color::Magenta);
+                window.draw(smarga);
                 character.setPosition(static_cast<float>(ig_SacMan.GetPosition().x), static_cast<float>(ig_SacMan.GetPosition().y));
                 character.setFillColor(sf::Color::Yellow);
                 window.draw(character);

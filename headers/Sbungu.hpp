@@ -57,12 +57,23 @@ class Sbungu : public Banker
     void Chase(Map &map) override
     {
         bool ways[4];
-        int selected = 0;
+        int selected = 0, availableWays = 0;
         double dist = 20000000;
         ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
         ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
         ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
         ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 2);
+        if(GetPosition().x - 2 <= 0)
+            ways[0] = true;
+        if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
+            ways[1] = true;
+        if(GetPosition().y - 2 <= 0)
+            ways[2] = true;
+        if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
+            ways[3] = true;
+        for(const bool way : ways)
+            if(way == false)
+                availableWays++;
         if(ways[0] == false)
         {
             if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
@@ -94,6 +105,23 @@ class Sbungu : public Banker
                 selected = 3;
             }
         }
+        if(availableWays == 1)
+            switch (dir)
+            {
+            case 0:
+                selected = 1;
+                break;
+            case 1:
+                selected = 0;
+                break;
+            case 2:
+                selected = 3;
+                break;
+            case 3:
+                selected = 2;
+                break;
+            default: ;
+            }
         dir = selected;
         switch (dir)
         {

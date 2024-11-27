@@ -17,6 +17,14 @@ class Smungu : public Banker
         ways[1] = map.CheckCollision(false, false, GetPosition().x + 2, GetPosition().y);
         ways[2] = map.CheckCollision(false, false, GetPosition().x, GetPosition().y - 2);
         ways[3] = map.CheckCollision(false, false, GetPosition().x, GetPosition().y + 2);
+        if(GetPosition().x - 2 <= 0)
+            ways[0] = true;
+        if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
+            ways[1] = true;
+        if(GetPosition().y - 2 <= 0)
+            ways[2] = true;
+        if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
+            ways[3] = true;
         for(const bool way : ways)
             if(way == false)
                 availableWays++;
@@ -35,6 +43,17 @@ class Smungu : public Banker
         if(GetTarget().x == -1 && GetTarget().y == -1)
         {
             bool selected = false;
+            if(availableWays == 1)
+            {
+                if(ways[0] == true)
+                    dir = 1;
+                if(ways[1] == true)
+                    dir = 0;
+                if(ways[2] == true)
+                    dir = 3;
+                if(ways[3] == true)
+                    dir = 2;
+            }
             if(availableWays == 2)
             {
                 if(dir == 0 && ways[0] == true)
@@ -91,47 +110,43 @@ class Smungu : public Banker
                 if(dir == 0 && selected == false)
                 {
                     dir = dirR(mt);
-                    while(dir == 0 || dir == 1 || ways[dir] == true)
+                    while(dir == 1 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
                 }
                 if(dir == 1 && selected == false)
                 {
                     dir = dirR(mt);
-                    while(dir == 1 || dir == 0 || ways[dir] == true)
+                    while(dir == 0 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
                 }
                 if(dir == 2 && selected == false)
                 {
                     dir = dirR(mt);
-                    while(dir == 2 || dir == 3 || ways[dir] == true)
+                    while(dir == 3 || ways[dir] == true)
                         dir = dirR(mt);
                     selected = true;
                 }
                 if(dir == 3 && selected == false)
                 {
                     dir = dirR(mt);
-                    while(dir == 3 || dir == 2 || ways[dir] == true)
+                    while(dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
                 }
                 switch (dir)
                 {
                 case 0:
-                    if(ways[0] == false)
-                        SetPosition(GetPosition().x - 2, GetPosition().y);
+                    SetPosition(GetPosition().x - 2, GetPosition().y);
                     break;
                 case 1:
-                    if(ways[1] == false)
-                        SetPosition(GetPosition().x + 2, GetPosition().y);
+                    SetPosition(GetPosition().x + 2, GetPosition().y);
                     break;
                 case 2:
-                    if(ways[2] == false)
-                        SetPosition(GetPosition().x, GetPosition().y - 2);
+                    SetPosition(GetPosition().x, GetPosition().y - 2);
                     break;
                 case 3:
-                    if(ways[3] == false)
-                        SetPosition(GetPosition().x, GetPosition().y + 2);
+                    SetPosition(GetPosition().x, GetPosition().y + 2);
                     break;
                 default: ;
                 }
@@ -160,12 +175,23 @@ class Smungu : public Banker
     void Chase(Map &map) override
     {
         bool ways[4];
-        int selected = 0;
+        int selected = 0, availableWays = 0;
         double dist = 20000000;
         ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
         ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
         ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
         ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 2);
+        if(GetPosition().x - 2 <= 0)
+            ways[0] = true;
+        if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
+            ways[1] = true;
+        if(GetPosition().y - 2 <= 0)
+            ways[2] = true;
+        if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
+            ways[3] = true;
+        for(const bool way : ways)
+            if(way == false)
+                availableWays++;
         if(ways[0] == false)
         {
             if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
@@ -197,6 +223,23 @@ class Smungu : public Banker
                 selected = 3;
             }
         }
+        if(availableWays == 1)
+            switch (dir)
+            {
+            case 0:
+                selected = 1;
+                break;
+            case 1:
+                selected = 0;
+                break;
+            case 2:
+                selected = 3;
+                break;
+            case 3:
+                selected = 2;
+                break;
+            default: ;
+            }
         dir = selected;
         switch (dir)
         {
@@ -214,8 +257,6 @@ class Smungu : public Banker
             break;
         default: ;
         }
-
-
     }
 
 };
