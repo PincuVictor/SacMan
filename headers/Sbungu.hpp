@@ -140,4 +140,23 @@ class Sbungu : public Banker
         default: ;
         }
     }
+
+    Sbungu() : Banker()
+    {
+        dir = 0;
+        timerClock.restart();
+        elapsedTime = 0;
+    }
+    Sbungu& operator=(const Sbungu& other)
+    {
+        dynamic_cast<Banker*>(this)->operator=(other);
+        dir = other.dir;
+        timerClock = other.timerClock;
+        elapsedTime = other.elapsedTime;
+        return *this;
+    }
+    Sbungu(const Sbungu &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime)
+    {
+
+    }
 };

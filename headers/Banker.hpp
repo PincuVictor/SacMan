@@ -6,7 +6,7 @@
 
 class Banker
 {
-    int speed, x{}, y{}, targetx{}, targety{};
+    int speed, x, y, targetx, targety;
     bool useDoor = true;
 
 public:
@@ -53,6 +53,8 @@ public:
     Banker()
     {
         speed = 2;
+        x = y = 0;
+        targetx = targety = -1;
     }
     Banker(const Banker& other) : speed(other.speed), x(other.x), y(other.y), targetx(other.x), targety(other.y), useDoor(other.useDoor)
     {

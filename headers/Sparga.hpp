@@ -43,14 +43,14 @@ class Sparga : public Banker
             bool selected = false;
             if(availableWays == 1)
             {
-                if(ways[0] == true)
-                    dir = 1;
-                if(ways[1] == true)
+                if(ways[0] == false)
                     dir = 0;
-                if(ways[2] == true)
-                    dir = 3;
-                if(ways[3] == true)
+                if(ways[1] == false)
+                    dir = 1;
+                if(ways[2] == false)
                     dir = 2;
+                if(ways[3] == false)
+                    dir = 3;
             }
             if(availableWays == 2)
             {
@@ -82,22 +82,6 @@ class Sparga : public Banker
                         dir = dirR(mt);
                     selected = true;
                 }
-                switch (dir)
-                {
-                case 0:
-                    SetPosition(GetPosition().x - 2, GetPosition().y);
-                    break;
-                case 1:
-                    SetPosition(GetPosition().x + 2, GetPosition().y);
-                    break;
-                case 2:
-                    SetPosition(GetPosition().x, GetPosition().y - 2);
-                    break;
-                case 3:
-                    SetPosition(GetPosition().x, GetPosition().y + 2);
-                    break;
-                default: ;
-                }
             }
             if(availableWays >= 3)
             {
@@ -128,22 +112,22 @@ class Sparga : public Banker
                     while(dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
                 }
-                switch (dir)
-                {
-                case 0:
-                    SetPosition(GetPosition().x - 2, GetPosition().y);
-                    break;
-                case 1:
-                    SetPosition(GetPosition().x + 2, GetPosition().y);
-                    break;
-                case 2:
-                    SetPosition(GetPosition().x, GetPosition().y - 2);
-                    break;
-                case 3:
-                    SetPosition(GetPosition().x, GetPosition().y + 2);
-                    break;
-                default: ;
-                }
+            }
+            switch (dir)
+            {
+            case 0:
+                SetPosition(GetPosition().x - 2, GetPosition().y);
+                break;
+            case 1:
+                SetPosition(GetPosition().x + 2, GetPosition().y);
+                break;
+            case 2:
+                SetPosition(GetPosition().x, GetPosition().y - 2);
+                break;
+            case 3:
+                SetPosition(GetPosition().x, GetPosition().y + 2);
+                break;
+            default: ;
             }
         }
         else
@@ -253,4 +237,22 @@ class Sparga : public Banker
         }
     }
 
+    Sparga() : Banker()
+    {
+        dir = 0;
+        timerClock.restart();
+        elapsedTime = 0;
+    }
+    Sparga& operator=(const Sparga& other)
+    {
+        dynamic_cast<Banker*>(this)->operator=(other);
+        dir = other.dir;
+        timerClock = other.timerClock;
+        elapsedTime = other.elapsedTime;
+        return *this;
+    }
+    Sparga(const Sparga &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime)
+    {
+
+    }
 };

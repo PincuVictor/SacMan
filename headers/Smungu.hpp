@@ -45,14 +45,14 @@ class Smungu : public Banker
             bool selected = false;
             if(availableWays == 1)
             {
-                if(ways[0] == true)
-                    dir = 1;
-                if(ways[1] == true)
+                if(ways[0] == false)
                     dir = 0;
-                if(ways[2] == true)
-                    dir = 3;
-                if(ways[3] == true)
+                if(ways[1] == false)
+                    dir = 1;
+                if(ways[2] == false)
                     dir = 2;
+                if(ways[3] == false)
+                    dir = 3;
             }
             if(availableWays == 2)
             {
@@ -84,26 +84,6 @@ class Smungu : public Banker
                         dir = dirR(mt);
                     selected = true;
                 }
-                switch (dir)
-                {
-                case 0:
-                    if(ways[0] == false)
-                        SetPosition(GetPosition().x - 2, GetPosition().y);
-                    break;
-                case 1:
-                    if(ways[1] == false)
-                        SetPosition(GetPosition().x + 2, GetPosition().y);
-                    break;
-                case 2:
-                    if(ways[2] == false)
-                        SetPosition(GetPosition().x, GetPosition().y - 2);
-                    break;
-                case 3:
-                    if(ways[3] == false)
-                        SetPosition(GetPosition().x, GetPosition().y + 2);
-                    break;
-                default: ;
-                }
             }
             if(availableWays >= 3)
             {
@@ -134,22 +114,22 @@ class Smungu : public Banker
                     while(dir == 2 || ways[dir] == true)
                         dir = dirR(mt);
                 }
-                switch (dir)
-                {
-                case 0:
-                    SetPosition(GetPosition().x - 2, GetPosition().y);
-                    break;
-                case 1:
-                    SetPosition(GetPosition().x + 2, GetPosition().y);
-                    break;
-                case 2:
-                    SetPosition(GetPosition().x, GetPosition().y - 2);
-                    break;
-                case 3:
-                    SetPosition(GetPosition().x, GetPosition().y + 2);
-                    break;
-                default: ;
-                }
+            }
+            switch (dir)
+            {
+            case 0:
+                SetPosition(GetPosition().x - 2, GetPosition().y);
+                break;
+            case 1:
+                SetPosition(GetPosition().x + 2, GetPosition().y);
+                break;
+            case 2:
+                SetPosition(GetPosition().x, GetPosition().y - 2);
+                break;
+            case 3:
+                SetPosition(GetPosition().x, GetPosition().y + 2);
+                break;
+            default: ;
             }
         }
         else
@@ -259,4 +239,22 @@ class Smungu : public Banker
         }
     }
 
+    Smungu() : Banker()
+    {
+        dir = 0;
+        timerClock.restart();
+        elapsedTime = 0;
+    }
+    Smungu& operator=(const Smungu& other)
+    {
+        dynamic_cast<Banker*>(this)->operator=(other);
+        dir = other.dir;
+        timerClock = other.timerClock;
+        elapsedTime = other.elapsedTime;
+        return *this;
+    }
+    Smungu(const Smungu &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime)
+    {
+
+    }
 };

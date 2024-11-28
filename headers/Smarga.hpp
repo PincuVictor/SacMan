@@ -137,4 +137,23 @@ class Smarga : public Banker
         default: ;
         }
     }
+
+    Smarga() : Banker()
+    {
+        dir = 0;
+        timerClock.restart();
+        elapsedTime = 0;
+    }
+    Smarga& operator=(const Smarga& other)
+    {
+        dynamic_cast<Banker*>(this)->operator=(other);
+        dir = other.dir;
+        timerClock = other.timerClock;
+        elapsedTime = other.elapsedTime;
+        return *this;
+    }
+    Smarga(const Smarga &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime)
+    {
+
+    }
 };
