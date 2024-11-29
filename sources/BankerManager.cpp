@@ -6,6 +6,14 @@ BankerManager::BankerManager()
         ig_Bankers[i] = InitBankers::Initialize(i);
 }
 
+BankerManager::BankerManager(const BankerManager& BM) : ig_Bankers(BM.ig_Bankers){}
+
+BankerManager& BankerManager::operator=(const BankerManager& BM)
+{
+    ig_Bankers = BM.ig_Bankers;
+    return *this;
+}
+
 void BankerManager::CallUpdate(Map &map, SacMan &ig_SacMan) const
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
