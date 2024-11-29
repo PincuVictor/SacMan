@@ -1,13 +1,14 @@
 #pragma once
 #include <random>
-#include "Global.hpp"
 #include "Map.hpp"
 #include "SacMan.hpp"
 
 class Banker
 {
-    int speed, x{}, y{}, targetx{}, targety{};
+    int speed, x, y, targetx, targety;
     bool useDoor = true;
+    virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
+    virtual void Chase(Map &map) = 0;
 public:
     /// șpârga, șmârga, șbungu, șmungu
     /// cand incep sa urmareasca sacu "ai-u" e ca se verifica cat ar fi distanta pana la sac daca ar lua o in fiecare din directiile posibile
@@ -17,67 +18,16 @@ public:
     /// smungu se plimba random nu fugareste
     /// clase derivate prin mostenire de la banker
 
-    virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
-
-    virtual void Chase(Map &map) = 0;
-
-    virtual void SetTarget(const int _x, const int _y)
-    {
-        targetx = _x;
-        targety = _y;
-    }
-
-    void GetOut()
-    {
-        if(useDoor == true)
-        {
-            targetx = x;
-            targety = y - 2 * CELL_SIZE;
-            useDoor = false;
-        }
-    }
-    void SetPosition(const int _x, const int _y)
-    {
-        x = _x;
-        y = _y;
-    }
-    [[nodiscard]] sf::Vector2<int> GetPosition() const
-    {
-        return {x, y};
-    }
-    [[nodiscard]] sf::Vector2<int> GetTarget() const
-    {
-        return {targetx, targety};
-    }
-
-    Banker()
-    {
-        speed = 2;
-    }
-    Banker(const Banker& other) : speed(other.speed), x(other.x), y(other.y), targetx(other.x), targety(other.y), useDoor(other.useDoor)
-    {
-
-    }
-
-    friend std::ostream& operator<<(std::ostream& stream, const Banker& G)
-    {
-        stream << "Speed: " << G.speed << '\n';
-        stream << "X: " << G.x << '\n';
-        stream << "Y: " << G.y << '\n';
-        stream << "Target X: " << G.targetx << '\n';
-        stream << "Target Y: " << G.targety << '\n';
-        stream << "UseDoor: " << G.useDoor << '\n';
-        return stream;
-    }
-    Banker& operator=(const Banker& other)
-    {
-        targetx = other.targetx;
-        targety = other.targety;
-        speed = other.speed;
-        x = other.x;
-        y = other.y;
-        return *this;
-    }
-
-    virtual ~Banker() = default;
+    void ImplUpdate(Map &map, SacMan &ig_SacMan);
+    void ImplChase(Map &map);
+    void SetTarget(int _x, int _y);
+    void GetOut();
+    void SetPosition(int _x, int _y);
+    [[nodiscard]] sf::Vector2<int> GetPosition() const;
+    [[nodiscard]] sf::Vector2<int> GetTarget() const;
+    Banker();
+    Banker(const Banker& other);
+    friend std::ostream& operator<<(std::ostream& stream, const Banker& B);
+    Banker& operator=(const Banker& other);
+    virtual ~Banker();
 };
