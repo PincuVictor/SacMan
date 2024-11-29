@@ -64,6 +64,17 @@ add_executable(${PROJECT_NAME}
         headers/Sbungu.hpp
         headers/BankerManager.hpp
         headers/InitBankers.hpp
+        sources/Banker.cpp
+        sources/BankerManager.cpp
+        sources/Engine.cpp
+        sources/InitBankers.cpp
+        sources/Level.cpp
+        sources/Map.cpp
+        sources/SacMan.cpp
+        sources/Sbungu.cpp
+        sources/Smarga.cpp
+        sources/Smungu.cpp
+        sources/Sparga.cpp
 )
 
 include(cmake/CompilerFlags.cmake)
