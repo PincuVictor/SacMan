@@ -128,7 +128,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
         if(GetTarget().x != GetPosition().x || GetTarget().y != GetPosition().y)
             if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 6.0f)
             {
-                Chase(map);
+                ImplChase(map);
             }
             else
             {

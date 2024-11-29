@@ -37,7 +37,7 @@ void Smarga::Update(Map &map, SacMan &ig_SacMan)
                 elapsedTime = 0;
                 SetTarget(-1, -1);
             }
-            Chase(map);
+            ImplChase(map);
         }
         else
             SetTarget(-1, -1);
