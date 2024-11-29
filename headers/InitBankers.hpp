@@ -8,5 +8,5 @@
 class InitBankers
 {
     public:
-    static Banker* Initialize(int id);
+    static std::shared_ptr<Banker> Initialize(int id);
 };

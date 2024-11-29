@@ -230,6 +230,11 @@ void Sparga::Chase(Map &map)
     }
 }
 
+std::shared_ptr<Banker> Sparga::Clone() const
+{
+    return std::make_shared<Sparga>(*this);
+}
+
 Sparga::Sparga() : Banker()
 {
     dir = 0;

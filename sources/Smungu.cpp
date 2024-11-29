@@ -230,6 +230,11 @@ void Smungu::Chase(Map &map)
     }
 }
 
+std::shared_ptr<Banker> Smungu::Clone() const
+{
+    return std::make_shared<Smungu>(*this);
+}
+
 Smungu::Smungu() : Banker()
 {
     dir = 0;
