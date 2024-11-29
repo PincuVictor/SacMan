@@ -6,11 +6,18 @@ BankerManager::BankerManager()
         ig_Bankers[i] = InitBankers::Initialize(i);
 }
 
-BankerManager::BankerManager(const BankerManager& BM) : ig_Bankers(BM.ig_Bankers){}
+BankerManager::BankerManager(const BankerManager& BM)
+{
+    for(int i = 0; i < BANKERS_NUMBER; ++i)
+        ig_Bankers[i] = InitBankers::Initialize(i);
+    for(int i = 0; i < BANKERS_NUMBER; ++i)
+        *ig_Bankers[i] = *BM.ig_Bankers[i];
+}
 
 BankerManager& BankerManager::operator=(const BankerManager& BM)
 {
-    ig_Bankers = BM.ig_Bankers;
+    for(int i = 0; i < BANKERS_NUMBER; ++i)
+        *ig_Bankers[i] = *BM.ig_Bankers[i];
     return *this;
 }
 
