@@ -1,15 +1,31 @@
 #include "../headers/InitBankers.hpp"
 
-Banker* InitBankers::Initialize(const int id)
+std::shared_ptr<Banker> InitBankers::Initialize(const int id)
 {
-    Banker* banker = nullptr;
+    std::shared_ptr<Banker> banker = nullptr;
     if(id == 0)
-        banker = new Smungu;
+    {
+        auto* smungu = new Smungu;
+        banker = smungu->ImplClone();
+        delete smungu;
+    }
     if(id == 1)
-        banker = new Sbungu;
+    {
+        auto* sbungu = new Sbungu;
+        banker = sbungu->ImplClone();
+        delete sbungu;
+    }
     if(id == 2)
-        banker = new Sparga;
+    {
+        auto* sparga = new Sparga;
+        banker = sparga->ImplClone();
+        delete sparga;
+    }
     if(id == 3)
-        banker = new Smarga;
+    {
+        auto* smarga = new Smarga;
+        banker = smarga->ImplClone();
+        delete smarga;
+    }
     return banker;
 }

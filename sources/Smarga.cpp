@@ -131,6 +131,11 @@ void Smarga::Chase(Map &map)
     }
 }
 
+std::shared_ptr<Banker> Smarga::Clone() const
+{
+    return std::make_shared<Smarga>(*this);
+}
+
 Smarga::Smarga() : Banker()
 {
     dir = 0;

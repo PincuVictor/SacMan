@@ -131,6 +131,11 @@ void Sbungu::Chase(Map &map)
     }
 }
 
+std::shared_ptr<Banker> Sbungu::Clone() const
+{
+    return std::make_shared<Sbungu>(*this);
+}
+
 Sbungu::Sbungu() : Banker()
 {
     dir = 0;

@@ -10,6 +10,11 @@ void Banker::ImplChase(Map &map)
     Chase(map);
 }
 
+[[nodiscard]] std::shared_ptr<Banker> Banker::ImplClone() const
+{
+    return Clone();
+}
+
 void Banker::SetTarget(const int _x, const int _y)
 {
     targetx = _x;

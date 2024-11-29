@@ -10,6 +10,7 @@ class Smungu : public Banker
     float elapsedTime = 0;
     void Update(Map &map, SacMan &ig_SacMan) override;
     void Chase(Map &map) override;
+    [[nodiscard]] std::shared_ptr<Banker> Clone() const override;
 
 public:
     Smungu();
