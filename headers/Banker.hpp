@@ -3,7 +3,7 @@
 #include <random>
 #include "Map.hpp"
 #include "SacMan.hpp"
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 class Banker
 {
