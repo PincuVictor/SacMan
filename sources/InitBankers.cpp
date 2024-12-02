@@ -7,27 +7,27 @@ std::shared_ptr<Banker> InitBankers::Initialize(const int id)
     if(id == 0)
     {
         Smungu smungu;
-        banker = smungu.ImplClone();
+        banker = smungu.Clone();
     }
     if(id == 1)
     {
         Sbungu sbungu;
-        banker = sbungu.ImplClone();
+        banker = sbungu.Clone();
     }
     if(id == 2)
     {
         Sparga sparga;
-        banker = sparga.ImplClone();
+        banker = sparga.Clone();
     }
     if(id == 3)
     {
         Smarga smarga;
-        banker = smarga.ImplClone();
+        banker = smarga.Clone();
     }
     return banker;
 }
 
 std::shared_ptr<Banker> InitBankers::Copy(const std::shared_ptr<Banker>& B)
 {
-    return B->ImplClone();
+    return B->Clone();
 }

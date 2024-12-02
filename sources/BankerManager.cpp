@@ -24,7 +24,7 @@ void BankerManager::CallUpdate(Map &map, SacMan &ig_SacMan) const
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
     {
-        ig_Bankers[i]->ImplUpdate(map, ig_SacMan);
+        ig_Bankers[i]->Update(map, ig_SacMan);
     }
 }
 

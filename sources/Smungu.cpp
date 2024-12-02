@@ -1,6 +1,6 @@
 #include "../headers/Smungu.hpp"
 
-void Smungu::Update(Map &map, SacMan &ig_SacMan)
+void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
     bool ways[4];
     int availableWays = 0;
@@ -23,7 +23,6 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
     std::mt19937 mt(rd());
     std::uniform_int_distribution<short> dirR(0, 3);
     GetOut();
-    SetBody(static_cast<float>(CELL_SIZE) / 2, sf::Color::Green, static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y));
     if(sqrt(pow(GetPosition().x - ig_SacMan.GetPosition().x, 2) + pow(GetPosition().y - ig_SacMan.GetPosition().y, 2)) <= 4 * CELL_SIZE
         && timerClock.getElapsedTime().asSeconds() > 7)
     {
@@ -134,7 +133,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
         if(GetTarget().x != GetPosition().x || GetTarget().y != GetPosition().y)
             if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 6.0f)
             {
-                ImplChase(map);
+                Chase(map);
             }
             else
             {
@@ -149,7 +148,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
     }
 }
 
-void Smungu::Chase(Map &map)
+void Smungu::ImplChase(Map &map)
 {
     bool ways[4];
     int selected = 0, availableWays = 0;
@@ -241,7 +240,7 @@ void Smungu::Chase(Map &map)
     }
 }
 
-std::shared_ptr<Banker> Smungu::Clone() const
+std::shared_ptr<Banker> Smungu::ImplClone() const
 {
     return std::make_shared<Smungu>(*this);
 }
@@ -251,6 +250,7 @@ Smungu::Smungu() : Banker()
     dir = 0;
     timerClock.restart();
     elapsedTime = 0;
+    SetBody(static_cast<float>(CELL_SIZE) / 2, sf::Color::Green, static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y));
 }
 
 Smungu& Smungu::operator=(const Smungu& other)

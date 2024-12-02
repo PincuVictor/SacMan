@@ -2,19 +2,19 @@
 
 #include <iostream>
 
-void Banker::ImplUpdate(Map &map, SacMan &ig_SacMan)
+void Banker::Update(Map &map, SacMan &ig_SacMan)
 {
-    Update(map, ig_SacMan);
+    ImplUpdate(map, ig_SacMan);
 }
 
-void Banker::ImplChase(Map &map)
+void Banker::Chase(Map &map)
 {
-    Chase(map);
+    ImplChase(map);
 }
 
-[[nodiscard]] std::shared_ptr<Banker> Banker::ImplClone() const
+[[nodiscard]] std::shared_ptr<Banker> Banker::Clone() const
 {
-    return Clone();
+    return ImplClone();
 }
 
 void Banker::SetTarget(const int _x, const int _y)
@@ -44,16 +44,16 @@ void Banker::SetSpeed(const int s)
     speed = s;
 }
 
-void Banker::SetBody(const float radius, const sf::Color color, const float x, const float y)
+void Banker::SetBody(const float radius, const sf::Color color, const float _x, const float _y)
 {
     body.setRadius(radius);
     body.setFillColor(color);
-    body.setPosition(sf::Vector2f(x, y));
+    body.setPosition(sf::Vector2f(_x, _y));
 }
 
-void Banker::SetBodyPosition(const float x, const float y)
+void Banker::SetBodyPosition(const float _x, const float _y)
 {
-    body.setPosition(sf::Vector2f(x, y));
+    body.setPosition(sf::Vector2f(_x, _y));
 }
 
 sf::CircleShape Banker::GetBody()
