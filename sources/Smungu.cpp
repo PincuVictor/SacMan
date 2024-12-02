@@ -1,6 +1,6 @@
 #include "../headers/Smungu.hpp"
 
-void Smungu::Update(Map &map, SacMan &ig_SacMan)
+void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
     bool ways[4];
     int availableWays = 0;
@@ -110,15 +110,20 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
         {
         case 0:
             SetPosition(GetPosition().x - 2, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
             break;
         case 1:
             SetPosition(GetPosition().x + 2, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+
             break;
         case 2:
             SetPosition(GetPosition().x, GetPosition().y - 2);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
             break;
         case 3:
             SetPosition(GetPosition().x, GetPosition().y + 2);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
             break;
         default: ;
         }
@@ -128,7 +133,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
         if(GetTarget().x != GetPosition().x || GetTarget().y != GetPosition().y)
             if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 6.0f)
             {
-                ImplChase(map);
+                Chase(map);
             }
             else
             {
@@ -143,7 +148,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
     }
 }
 
-void Smungu::Chase(Map &map)
+void Smungu::ImplChase(Map &map)
 {
     bool ways[4];
     int selected = 0, availableWays = 0;
@@ -216,21 +221,26 @@ void Smungu::Chase(Map &map)
     {
     case 0:
         SetPosition(GetPosition().x - 2, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
         break;
     case 1:
         SetPosition(GetPosition().x + 2, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+
         break;
     case 2:
         SetPosition(GetPosition().x, GetPosition().y - 2);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
         break;
     case 3:
         SetPosition(GetPosition().x, GetPosition().y + 2);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
         break;
     default: ;
     }
 }
 
-std::shared_ptr<Banker> Smungu::Clone() const
+std::shared_ptr<Banker> Smungu::ImplClone() const
 {
     return std::make_shared<Smungu>(*this);
 }
@@ -240,11 +250,14 @@ Smungu::Smungu() : Banker()
     dir = 0;
     timerClock.restart();
     elapsedTime = 0;
+    SetBody(static_cast<float>(CELL_SIZE) / 2, sf::Color::Green, static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y));
 }
 
 Smungu& Smungu::operator=(const Smungu& other)
 {
-    dynamic_cast<Banker*>(this)->operator=(other);
+    SetPosition(other.GetPosition().x, other.GetPosition().y);
+    SetTarget(other.GetTarget().x, other.GetTarget().y);
+    SetSpeed(other.GetSpeed());
     dir = other.dir;
     timerClock = other.timerClock;
     elapsedTime = other.elapsedTime;

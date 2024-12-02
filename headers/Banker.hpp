@@ -3,14 +3,16 @@
 #include <random>
 #include "Map.hpp"
 #include "SacMan.hpp"
+#include <SFML/Graphics.hpp>
 
 class Banker
 {
     int speed, x, y, targetx, targety;
     bool useDoor = true;
-    virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
-    virtual void Chase(Map &map) = 0;
-    [[nodiscard]] virtual std::shared_ptr<Banker> Clone() const = 0;
+    sf::CircleShape body;
+    virtual void ImplUpdate(Map &map, SacMan &ig_SacMan) = 0;
+    virtual void ImplChase(Map &map) = 0;
+    [[nodiscard]] virtual std::shared_ptr<Banker> ImplClone() const = 0;
 public:
     /// șpârga, șmârga, șbungu, șmungu
     /// cand incep sa urmareasca sacu "ai-u" e ca se verifica cat ar fi distanta pana la sac daca ar lua o in fiecare din directiile posibile
@@ -19,12 +21,17 @@ public:
     /// sbungu isi alege un colt al hartii pana in care se duce, cand ajunge acolo isi alege altu, fugareste in apropiere
     /// smungu se plimba random nu fugareste
     /// clase derivate prin mostenire de la banker
-    void ImplUpdate(Map &map, SacMan &ig_SacMan);
-    void ImplChase(Map &map);
-    [[nodiscard]] std::shared_ptr<Banker> ImplClone() const;
+    void Update(Map &map, SacMan &ig_SacMan);
+    void Chase(Map &map);
+    [[nodiscard]] std::shared_ptr<Banker> Clone() const;
     void SetTarget(int _x, int _y);
     void GetOut();
     void SetPosition(int _x, int _y);
+    void SetSpeed(int s);
+    void SetBody(float radius, sf::Color color, float _x, float _y);
+    void SetBodyPosition(float _x, float _y);
+    sf::CircleShape GetBody();
+    int GetSpeed() const;
     [[nodiscard]] sf::Vector2<int> GetPosition() const;
     [[nodiscard]] sf::Vector2<int> GetTarget() const;
     Banker();
