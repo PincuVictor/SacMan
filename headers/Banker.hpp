@@ -3,11 +3,13 @@
 #include <random>
 #include "Map.hpp"
 #include "SacMan.hpp"
+#include "SFML/Graphics/CircleShape.hpp"
 
 class Banker
 {
     int speed, x, y, targetx, targety;
     bool useDoor = true;
+    sf::CircleShape body;
     virtual void Update(Map &map, SacMan &ig_SacMan) = 0;
     virtual void Chase(Map &map) = 0;
     [[nodiscard]] virtual std::shared_ptr<Banker> Clone() const = 0;
@@ -25,6 +27,11 @@ public:
     void SetTarget(int _x, int _y);
     void GetOut();
     void SetPosition(int _x, int _y);
+    void SetSpeed(int s);
+    void SetBody(float radius, sf::Color color, float x, float y);
+    void SetBodyPosition(float x, float y);
+    sf::CircleShape GetBody();
+    int GetSpeed() const;
     [[nodiscard]] sf::Vector2<int> GetPosition() const;
     [[nodiscard]] sf::Vector2<int> GetTarget() const;
     Banker();

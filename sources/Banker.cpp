@@ -1,5 +1,7 @@
 #include "../headers/Banker.hpp"
 
+#include <iostream>
+
 void Banker::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
     Update(map, ig_SacMan);
@@ -37,6 +39,34 @@ void Banker::SetPosition(const int _x, const int _y)
     y = _y;
 }
 
+void Banker::SetSpeed(const int s)
+{
+    speed = s;
+}
+
+void Banker::SetBody(const float radius, const sf::Color color, const float x, const float y)
+{
+    body.setRadius(radius);
+    body.setFillColor(color);
+    body.setPosition(sf::Vector2f(x, y));
+}
+
+void Banker::SetBodyPosition(const float x, const float y)
+{
+    body.setPosition(sf::Vector2f(x, y));
+}
+
+sf::CircleShape Banker::GetBody()
+{
+    return body;
+}
+
+
+int Banker::GetSpeed() const
+{
+    return speed;
+}
+
 [[nodiscard]] sf::Vector2<int> Banker::GetPosition() const
 {
     return {x, y};
@@ -52,9 +82,12 @@ Banker::Banker()
     speed = 2;
     x = y = 0;
     targetx = targety = -1;
+    body.setRadius(static_cast<float>(CELL_SIZE) / 2);
+    body.setFillColor(sf::Color::White);
+    body.setPosition(sf::Vector2f(static_cast<float>(x), static_cast<float>(y)));
 }
 
-Banker::Banker(const Banker& other) : speed(other.speed), x(other.x), y(other.y), targetx(other.x), targety(other.y), useDoor(other.useDoor){}
+Banker::Banker(const Banker& other) : speed(other.speed), x(other.x), y(other.y), targetx(other.targetx), targety(other.targety), useDoor(other.useDoor), body(other.body){}
 
 std::ostream& operator<<(std::ostream& stream, const Banker& B)
 {
@@ -74,6 +107,7 @@ Banker& Banker::operator=(const Banker& other)
     speed = other.speed;
     x = other.x;
     y = other.y;
+    body = other.body;
     return *this;
 }
 

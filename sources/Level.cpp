@@ -5,11 +5,9 @@ void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGH
     sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
     sf::CircleShape character(static_cast<float>(CELL_SIZE) / 2);
     sf::CircleShape coin(static_cast<float>(CELL_SIZE) / 5);
-    sf::CircleShape smungu(static_cast<float>(CELL_SIZE) / 2);
-    sf::CircleShape sbungu(static_cast<float>(CELL_SIZE) / 2);
-    sf::CircleShape sparga(static_cast<float>(CELL_SIZE) / 2);
-    sf::CircleShape smarga(static_cast<float>(CELL_SIZE) / 2);
-
+    std::array<sf::CircleShape, BANKERS_NUMBER> DrawableBankers;
+    for (int i = 0; i < BANKERS_NUMBER; i++)
+        DrawableBankers[i] = ig_BankerManager.GetBanker(i)->GetBody();
     for (int i = 0; i < MAP1_HEIGHT; i++)
     {
         for (int j = 0; j < MAP1_WIDTH; j++)
@@ -32,18 +30,8 @@ void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGH
                 cell.setFillColor(sf::Color::Red);
                 window.draw(cell);
             }
-            sbungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(0)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(0)->GetPosition().y));
-            sbungu.setFillColor(sf::Color::Green);
-            window.draw(sbungu);
-            smungu.setPosition(static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(1)->GetPosition().y));
-            smungu.setFillColor(sf::Color::Red);
-            window.draw(smungu);
-            sparga.setPosition(static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(2)->GetPosition().y));
-            sparga.setFillColor(sf::Color::Cyan);
-            window.draw(sparga);
-            smarga.setPosition(static_cast<float>(ig_BankerManager.GetBanker(3)->GetPosition().x), static_cast<float>(ig_BankerManager.GetBanker(3)->GetPosition().y));
-            smarga.setFillColor(sf::Color::Magenta);
-            window.draw(smarga);
+            for(int k = 0; k < BANKERS_NUMBER; k++)
+                window.draw(DrawableBankers[k]);
             character.setPosition(static_cast<float>(ig_SacMan.GetPosition().x), static_cast<float>(ig_SacMan.GetPosition().y));
             character.setFillColor(sf::Color::Yellow);
             window.draw(character);

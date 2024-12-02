@@ -1,4 +1,5 @@
 #include "../headers/BankerManager.hpp"
+#include <thread>
 
 BankerManager::BankerManager()
 {
@@ -9,9 +10,7 @@ BankerManager::BankerManager()
 BankerManager::BankerManager(const BankerManager& BM)
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
-        ig_Bankers[i] = InitBankers::Initialize(i);
-    for(int i = 0; i < BANKERS_NUMBER; ++i)
-        *ig_Bankers[i] = *BM.ig_Bankers[i];
+        ig_Bankers[i] = InitBankers::Copy(BM.ig_Bankers[i]);
 }
 
 BankerManager& BankerManager::operator=(const BankerManager& BM)
@@ -24,7 +23,9 @@ BankerManager& BankerManager::operator=(const BankerManager& BM)
 void BankerManager::CallUpdate(Map &map, SacMan &ig_SacMan) const
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
+    {
         ig_Bankers[i]->ImplUpdate(map, ig_SacMan);
+    }
 }
 
 void BankerManager::CallSetPosition(const int x, const int y) const
@@ -35,7 +36,7 @@ void BankerManager::CallSetPosition(const int x, const int y) const
 
 [[nodiscard]] std::shared_ptr<Banker> BankerManager::GetBanker(const int c) const
 {
-    if(c >= 0 && c < 4)
+    if(c >= 0 && c < BANKERS_NUMBER)
         return ig_Bankers[c];
     return nullptr;
 }

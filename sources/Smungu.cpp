@@ -23,6 +23,7 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
     std::mt19937 mt(rd());
     std::uniform_int_distribution<short> dirR(0, 3);
     GetOut();
+    SetBody(static_cast<float>(CELL_SIZE) / 2, sf::Color::Green, static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y));
     if(sqrt(pow(GetPosition().x - ig_SacMan.GetPosition().x, 2) + pow(GetPosition().y - ig_SacMan.GetPosition().y, 2)) <= 4 * CELL_SIZE
         && timerClock.getElapsedTime().asSeconds() > 7)
     {
@@ -110,15 +111,20 @@ void Smungu::Update(Map &map, SacMan &ig_SacMan)
         {
         case 0:
             SetPosition(GetPosition().x - 2, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
             break;
         case 1:
             SetPosition(GetPosition().x + 2, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+
             break;
         case 2:
             SetPosition(GetPosition().x, GetPosition().y - 2);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
             break;
         case 3:
             SetPosition(GetPosition().x, GetPosition().y + 2);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
             break;
         default: ;
         }
@@ -216,15 +222,20 @@ void Smungu::Chase(Map &map)
     {
     case 0:
         SetPosition(GetPosition().x - 2, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
         break;
     case 1:
         SetPosition(GetPosition().x + 2, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+
         break;
     case 2:
         SetPosition(GetPosition().x, GetPosition().y - 2);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
         break;
     case 3:
         SetPosition(GetPosition().x, GetPosition().y + 2);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
         break;
     default: ;
     }
@@ -244,7 +255,9 @@ Smungu::Smungu() : Banker()
 
 Smungu& Smungu::operator=(const Smungu& other)
 {
-    dynamic_cast<Banker*>(this)->operator=(other);
+    SetPosition(other.GetPosition().x, other.GetPosition().y);
+    SetTarget(other.GetTarget().x, other.GetTarget().y);
+    SetSpeed(other.GetSpeed());
     dir = other.dir;
     timerClock = other.timerClock;
     elapsedTime = other.elapsedTime;
