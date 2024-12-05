@@ -1,5 +1,9 @@
 #include "../headers/Sbungu.hpp"
 
+#include <iostream>
+
+#include "../headers/EHBankers.hpp"
+
 void Sbungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
     bool chasingSac = false;
@@ -37,7 +41,15 @@ void Sbungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
                 elapsedTime = 0;
                 SetTarget(-1, -1);
             }
-            Chase(map);
+            try
+            {
+                Chase(map);
+            }
+            catch (EHBankers &error)
+            {
+                std::cout << "Banker error:" << error.what() << std::endl;
+                throw;
+            }
         }
         else
             SetTarget(-1, -1);
@@ -49,6 +61,9 @@ void Sbungu::ImplChase(Map &map)
     bool ways[4];
     int selected = 0, availableWays = 0;
     double dist = 20000000;
+    if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
+        || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
+        throw EHBankers("Banker Out of Bounds!");
     ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
     ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
     ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
@@ -64,6 +79,8 @@ void Sbungu::ImplChase(Map &map)
     for(const bool way : ways)
         if(way == false)
             availableWays++;
+    if (availableWays == 0)
+        throw EHBankers("Banker blocat! Nicio cale posibila detectata");
     if(ways[0] == false)
     {
         if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
@@ -134,6 +151,8 @@ void Sbungu::ImplChase(Map &map)
         break;
     default: ;
     }
+    if (dir < 0 || dir > 3)
+        throw EHBankers("Banker | directia selectata nu exista!");
 }
 
 std::shared_ptr<Banker> Sbungu::ImplClone() const

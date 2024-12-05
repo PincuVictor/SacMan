@@ -1,5 +1,7 @@
 #include "../headers/InitBankers.hpp"
 
+#include "../headers/EHBankers.hpp"
+
 
 std::shared_ptr<Banker> InitBankers::Initialize(const int id)
 {
@@ -16,14 +18,11 @@ std::shared_ptr<Banker> InitBankers::Initialize(const int id)
     }
     if(id == 2)
     {
-        Sparga sparga;
-        banker = sparga.Clone();
-    }
-    if(id == 3)
-    {
         Smarga smarga;
         banker = smarga.Clone();
     }
+    if (banker == nullptr)
+        throw EHBankers("Eroare la initializarea Bankerilor");
     return banker;
 }
 

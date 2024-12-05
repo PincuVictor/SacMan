@@ -1,5 +1,7 @@
 #include "../headers/Level.hpp"
 
+#include "../headers/EHMap.hpp"
+
 void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const BankerManager& ig_BankerManager)
 {
     sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
@@ -7,7 +9,11 @@ void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGH
     sf::CircleShape coin(static_cast<float>(CELL_SIZE) / 5);
     std::array<sf::CircleShape, BANKERS_NUMBER> DrawableBankers;
     for (int i = 0; i < BANKERS_NUMBER; i++)
+    {
         DrawableBankers[i] = ig_BankerManager.GetBanker(i)->GetBody();
+        if (&DrawableBankers[i] == nullptr)
+            throw EHMap("Nu s-au putut obtine toate corpurile Bankerilor pentru Draw!");
+    }
     for (int i = 0; i < MAP1_HEIGHT; i++)
     {
         for (int j = 0; j < MAP1_WIDTH; j++)

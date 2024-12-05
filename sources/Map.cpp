@@ -1,5 +1,9 @@
 #include "../headers/Map.hpp"
 
+#include <iostream>
+
+#include "../headers/EHMap.hpp"
+
 Map::Map()
 {
     std::ifstream in("configs/map1");
@@ -26,6 +30,15 @@ Map::Map()
 
 [[nodiscard]] std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> Map::GetMap(const int lvl) const
 {
+    for (int i = 0; i < MAP1_WIDTH-1; i++)
+    {
+        for (int j = 0; j < MAP1_HEIGHT-1; j++)
+        {
+            if (map1[i][j] != '0' && map1[i][j] != '1' && map1[i][j] != '2' && map1[i][j] != '3' && map1[i][j] != '4'
+                && map1[i][j] != '5')
+                throw EHMap("Caractere invalide pentru construirea hartii!");
+        }
+    }
     if(lvl == 1)
         return map1;
     return map1;

@@ -74,7 +74,10 @@ add_executable(${PROJECT_NAME}
         sources/Sbungu.cpp
         sources/Smarga.cpp
         sources/Smungu.cpp
-        sources/Sparga.cpp
+        headers/EHBankers.hpp
+        headers/ErrorHandling.hpp
+        headers/EHSacMan.hpp
+        headers/EHMap.hpp
 )
 
 include(cmake/CompilerFlags.cmake)

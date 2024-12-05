@@ -1,7 +1,12 @@
 #include "../headers/SacMan.hpp"
 
+#include "../headers/EHSacMan.hpp"
+
 void SacMan::Update(Map &map)
 {
+    if (map.CheckCollision(false, false, x - speed, y) && map.CheckCollision(false, false, x + speed, y)
+        && map.CheckCollision(false, false, x, y - speed) && map.CheckCollision(false, false, x, y + speed))
+        throw EHSacMan("SacMan blocat! Nicio cale de miscare posibila detectata!");
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && map.CheckCollision(false, false, x - speed, y) == false)
         SetPosition(x - speed, y);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && map.CheckCollision(false, false, x + speed, y) == false)
@@ -11,6 +16,8 @@ void SacMan::Update(Map &map)
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map.CheckCollision(false, false, x, y + speed) == false)
         SetPosition(x, y + speed);
     IncrementPoints(map);
+    if (2 * -CELL_SIZE >= x || (CELL_SIZE + 10) * MAP1_WIDTH <= x)
+        throw EHSacMan("SacMan Out of Bounds!");
     if (-CELL_SIZE >= x)
     {
         x = CELL_SIZE * MAP1_WIDTH - 2;

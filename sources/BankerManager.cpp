@@ -1,10 +1,24 @@
 #include "../headers/BankerManager.hpp"
+
+#include <iostream>
 #include <thread>
+
+#include "../headers/EHBankers.hpp"
 
 BankerManager::BankerManager()
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
-        ig_Bankers[i] = InitBankers::Initialize(i);
+    {
+        try
+        {
+            ig_Bankers[i] = InitBankers::Initialize(i);
+        }
+        catch(EHBankers &error)
+        {
+            std::cout << "Eroare Banker: " << error.what() << std::endl;
+        }
+    }
+
 }
 
 BankerManager::BankerManager(const BankerManager& BM)
@@ -24,7 +38,14 @@ void BankerManager::CallUpdate(Map &map, SacMan &ig_SacMan) const
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
     {
-        ig_Bankers[i]->Update(map, ig_SacMan);
+        try
+        {
+            ig_Bankers[i]->Update(map, ig_SacMan);
+        }
+        catch(EHBankers &error)
+        {
+            std::cout << "Eroare Banker: " << error.what() << std::endl;
+        }
     }
 }
 
