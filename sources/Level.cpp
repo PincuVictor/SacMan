@@ -11,8 +11,6 @@ void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGH
     for (int i = 0; i < BANKERS_NUMBER; i++)
     {
         DrawableBankers[i] = ig_BankerManager.GetBanker(i)->GetBody();
-        if (&DrawableBankers[i] == nullptr)
-            throw MapError("Nu s-au putut obtine toate corpurile Bankerilor pentru Draw!");
     }
     for (int i = 0; i < MAP1_HEIGHT; i++)
     {
