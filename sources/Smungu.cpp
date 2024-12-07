@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "../headers/EHBankers.hpp"
+#include "../headers/BankerError.hpp"
 
 void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
@@ -10,7 +10,7 @@ void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
     int availableWays = 0;
     if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
         || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
-        throw EHBankers("Banker Out of Bounds!");
+        throw BankerError("Banker Out of Bounds!");
     ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
     ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
     ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
@@ -27,7 +27,7 @@ void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
         if(way == false)
             availableWays++;
     if (availableWays == 0)
-        throw EHBankers("Banker blocat! Nicio cale posibila detectata");
+        throw BankerError("Banker blocat! Nicio cale posibila detectata");
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<short> dirR(0, 3);
@@ -137,22 +137,14 @@ void Smungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
         default: ;
         }
         if (dir < 0 || dir > 3)
-            throw EHBankers("Banker | directia selectata nu exista!");
+            throw BankerError("Banker | directia selectata nu exista!");
     }
     else
     {
         if(GetTarget().x != GetPosition().x || GetTarget().y != GetPosition().y)
             if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 6.0f)
             {
-                try
-                {
-                    Chase(map);
-                }
-                catch (EHBankers &error)
-                {
-                    std::cout << "Banker error in Chase: " << error.what() << std::endl;
-                    throw;
-                }
+                Chase(map);
             }
             else
             {
@@ -174,7 +166,7 @@ void Smungu::ImplChase(Map &map)
     double dist = 20000000;
     if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
     || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
-        throw EHBankers("Banker Out of Bounds!");
+        throw BankerError("Banker Out of Bounds!");
     ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
     ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
     ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
@@ -191,7 +183,7 @@ void Smungu::ImplChase(Map &map)
         if(way == false)
             availableWays++;
     if (availableWays == 0)
-        throw EHBankers("Banker blocat! Nicio cale posibila detectata");
+        throw BankerError("Banker blocat! Nicio cale posibila detectata");
     if(ways[0] == false)
     {
         if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
@@ -263,7 +255,7 @@ void Smungu::ImplChase(Map &map)
     default: ;
     }
     if (dir < 0 || dir > 3)
-        throw EHBankers("Banker | directia selectata nu exista!");
+        throw BankerError("Banker | directia selectata nu exista!");
 }
 
 std::shared_ptr<Banker> Smungu::ImplClone() const

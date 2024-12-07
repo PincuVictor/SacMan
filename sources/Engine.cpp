@@ -2,19 +2,9 @@
 
 #include <iostream>
 
-#include "../headers/EHMap.hpp"
-#include "../headers/EHSacMan.hpp"
-
 Engine::Engine(sf::RenderWindow &gameWindow) : window(gameWindow)
 {
-    try
-    {
-        ig_map = this->map.GetMap(1);
-    }
-    catch (EHMap &error)
-    {
-        std::cout << "Eroare Harta: " << error.what() << std::endl;
-    }
+    ig_map = this->map.GetMap(1);
     for(int i = 0; i < MAP1_HEIGHT; i++)
     {
         for(int j = 0; j < MAP1_WIDTH; j++)
@@ -29,24 +19,9 @@ Engine::Engine(sf::RenderWindow &gameWindow) : window(gameWindow)
 
 void Engine::Update()
 {
-    try
-    {
-        ig_SacMan.Update(map);
-    }
-    catch (EHSacMan &error)
-    {
-        std::cout << "Eroare SacMan: " << error.what() << std::endl;
-    }
+    ig_SacMan.Update(map);
     ig_BankerManager.CallUpdate(map, ig_SacMan);
-    try
-    {
-        Level::DrawMap(this->map.GetMap(1), window, ig_SacMan, ig_BankerManager);
-    }
-    catch (EHMap &error)
-    {
-        std::cout << "Eroare Harta: " << error.what() << std::endl;
-    }
-
+    Level::DrawMap(this->map.GetMap(1), window, ig_SacMan, ig_BankerManager);
 }
 
 std::ostream& operator<<(std::ostream& stream, const Engine& engine)

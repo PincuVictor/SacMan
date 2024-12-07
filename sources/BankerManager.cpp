@@ -1,30 +1,27 @@
 #include "../headers/BankerManager.hpp"
 
-#include <iostream>
 #include <thread>
 
-#include "../headers/EHBankers.hpp"
+#include "../headers/BankerError.hpp"
 
 BankerManager::BankerManager()
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
     {
-        try
-        {
-            ig_Bankers[i] = InitBankers::Initialize(i);
-        }
-        catch(EHBankers &error)
-        {
-            std::cout << "Eroare Banker: " << error.what() << std::endl;
-        }
+        ig_Bankers[i] = InitBankers::Initialize(i);
+        if(ig_Bankers[i] == nullptr)
+            throw BankerError("Eroare la initializarea Bankerilor");
     }
-
 }
 
 BankerManager::BankerManager(const BankerManager& BM)
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
+    {
         ig_Bankers[i] = InitBankers::Copy(BM.ig_Bankers[i]);
+        if(ig_Bankers[i] == nullptr)
+            throw BankerError("Eroare la copierea Bankerilor");
+    }
 }
 
 BankerManager& BankerManager::operator=(const BankerManager& BM)
@@ -38,14 +35,7 @@ void BankerManager::CallUpdate(Map &map, SacMan &ig_SacMan) const
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
     {
-        try
-        {
-            ig_Bankers[i]->Update(map, ig_SacMan);
-        }
-        catch(EHBankers &error)
-        {
-            std::cout << "Eroare Banker: " << error.what() << std::endl;
-        }
+        ig_Bankers[i]->Update(map, ig_SacMan);
     }
 }
 

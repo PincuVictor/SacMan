@@ -1,6 +1,6 @@
 #include "../headers/Level.hpp"
 
-#include "../headers/EHMap.hpp"
+#include "../headers/MapError.hpp"
 
 void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> ig_level, sf::RenderWindow& window, const SacMan& ig_SacMan, const BankerManager& ig_BankerManager)
 {
@@ -12,7 +12,7 @@ void Level::DrawMap(std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGH
     {
         DrawableBankers[i] = ig_BankerManager.GetBanker(i)->GetBody();
         if (&DrawableBankers[i] == nullptr)
-            throw EHMap("Nu s-au putut obtine toate corpurile Bankerilor pentru Draw!");
+            throw MapError("Nu s-au putut obtine toate corpurile Bankerilor pentru Draw!");
     }
     for (int i = 0; i < MAP1_HEIGHT; i++)
     {

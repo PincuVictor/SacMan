@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "../headers/EHMap.hpp"
+#include "../headers/MapError.hpp"
 
 Map::Map()
 {
@@ -36,7 +36,7 @@ Map::Map()
         {
             if (map1[i][j] != '0' && map1[i][j] != '1' && map1[i][j] != '2' && map1[i][j] != '3' && map1[i][j] != '4'
                 && map1[i][j] != '5')
-                throw EHMap("Caractere invalide pentru construirea hartii!");
+                throw MapError("Caractere invalide pentru construirea hartii!");
         }
     }
     if(lvl == 1)
