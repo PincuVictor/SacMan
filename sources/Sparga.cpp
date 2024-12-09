@@ -1,30 +1,40 @@
 #include "../headers/Sparga.hpp"
 
+#include <iostream>
+
+#include "../headers/BankerError.hpp"
+
 void Sparga::ImplUpdate(Map &map, SacMan &ig_SacMan)
 {
+    SetSpeed(1);
     bool ways[4];
     int availableWays = 0;
-    ways[0] = map.CheckCollision(false, false, GetPosition().x - 2, GetPosition().y);
-    ways[1] = map.CheckCollision(false, false, GetPosition().x + 2, GetPosition().y);
-    ways[2] = map.CheckCollision(false, false, GetPosition().x, GetPosition().y - 2);
-    ways[3] = map.CheckCollision(false, false, GetPosition().x, GetPosition().y + 2);
-    if(GetPosition().x - 2 <= 0)
+    if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
+        || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
+        throw BankerError("Banker Out of Bounds!");
+    ways[0] = map.CheckCollision(false, true, GetPosition().x - 1, GetPosition().y);
+    ways[1] = map.CheckCollision(false, true, GetPosition().x + 1, GetPosition().y);
+    ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 1);
+    ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 1);
+    if(GetPosition().x - 1 <= 0)
         ways[0] = true;
-    if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
+    if(GetPosition().x + 1 >= (MAP1_WIDTH - 1) * CELL_SIZE)
         ways[1] = true;
-    if(GetPosition().y - 2 <= 0)
+    if(GetPosition().y - 1 <= 0)
         ways[2] = true;
-    if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
+    if(GetPosition().y + 1 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
         ways[3] = true;
     for(const bool way : ways)
         if(way == false)
             availableWays++;
+    if (availableWays == 0)
+        throw BankerError("Banker blocat! Nicio cale posibila detectata");
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<short> dirR(0, 3);
     GetOut();
-    if(sqrt(pow(GetPosition().x - ig_SacMan.GetPosition().x, 2) + pow(GetPosition().y - ig_SacMan.GetPosition().y, 2)) <= 4 * CELL_SIZE
-        && timerClock.getElapsedTime().asSeconds() > 7)
+    if(sqrt(pow(GetPosition().x - ig_SacMan.GetPosition().x, 2) + pow(GetPosition().y - ig_SacMan.GetPosition().y, 2)) <= 9 * CELL_SIZE
+        && timerClock.getElapsedTime().asSeconds() > 10)
     {
         SetTarget(ig_SacMan.GetPosition().x, ig_SacMan.GetPosition().y);
         if(elapsedTime == 0)
@@ -39,7 +49,7 @@ void Sparga::ImplUpdate(Map &map, SacMan &ig_SacMan)
             if(ways[0] == false)
                 dir = 0;
             if(ways[1] == false)
-                   dir = 1;
+                dir = 1;
             if(ways[2] == false)
                 dir = 2;
             if(ways[3] == false)
@@ -109,30 +119,33 @@ void Sparga::ImplUpdate(Map &map, SacMan &ig_SacMan)
         switch (dir)
         {
         case 0:
-            SetPosition(GetPosition().x - 2, GetPosition().y);
-            SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
+            SetPosition(GetPosition().x - 1, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x - 1), static_cast<float>(GetPosition().y));
             break;
         case 1:
-            SetPosition(GetPosition().x + 2, GetPosition().y);
-            SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+            SetPosition(GetPosition().x + 1, GetPosition().y);
+            SetBodyPosition(static_cast<float>(GetPosition().x + 1), static_cast<float>(GetPosition().y));
 
             break;
         case 2:
-            SetPosition(GetPosition().x, GetPosition().y - 2);
-            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
+            SetPosition(GetPosition().x, GetPosition().y - 1);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 1));
             break;
         case 3:
-            SetPosition(GetPosition().x, GetPosition().y + 2);
-            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
+            SetPosition(GetPosition().x, GetPosition().y + 1);
+            SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 1));
             break;
         default: ;
         }
+        if (dir < 0 || dir > 3)
+            throw BankerError("Banker | directia selectata nu exista!");
     }
     else
     {
         if(GetTarget().x != GetPosition().x || GetTarget().y != GetPosition().y)
-            if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 6.0f)
+            if(timerClock.getElapsedTime().asSeconds() - elapsedTime < 2.0f)
             {
+                SetPosition(GetPosition().x % 4 + GetPosition().x, GetPosition().y % 4 + GetPosition().y);
                 Chase(map);
             }
             else
@@ -150,51 +163,57 @@ void Sparga::ImplUpdate(Map &map, SacMan &ig_SacMan)
 
 void Sparga::ImplChase(Map &map)
 {
+    SetSpeed(4);
     bool ways[4];
     int selected = 0, availableWays = 0;
     double dist = 20000000;
-    ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
-    ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
-    ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
-    ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 2);
-    if(GetPosition().x - 2 <= CELL_SIZE)
+    if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
+    || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
+        throw BankerError("Banker Out of Bounds!");
+    ways[0] = map.CheckCollision(false, true, GetPosition().x - 4, GetPosition().y);
+    ways[1] = map.CheckCollision(false, true, GetPosition().x + 4, GetPosition().y);
+    ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 4);
+    ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 4);
+    if(GetPosition().x - 4 <= 0)
         ways[0] = true;
-    if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
+    if(GetPosition().x + 4 >= (MAP1_WIDTH - 1) * CELL_SIZE)
         ways[1] = true;
-    if(GetPosition().y - 2 <= CELL_SIZE)
+    if(GetPosition().y - 4 <= 0)
         ways[2] = true;
-    if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
+    if(GetPosition().y + 4 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
         ways[3] = true;
     for(const bool way : ways)
         if(way == false)
             availableWays++;
+    if (availableWays == 0)
+        throw BankerError("Banker blocat! Nicio cale posibila detectata");
     if(ways[0] == false)
     {
-        if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
+        if(sqrt(pow(GetPosition().x - 4 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
         {
-            dist = sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
+            dist = sqrt(pow(GetPosition().x - 4 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
             selected = 0;
         }
     }
     if(ways[1] == false)
     {
-        if(sqrt(pow(GetPosition().x + 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 0)
+        if(sqrt(pow(GetPosition().x + 4 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 0)
         {
-            dist = sqrt(pow(GetPosition().x + 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
+            dist = sqrt(pow(GetPosition().x + 4 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
             selected = 1;
         }
     }
     if(ways[2] == false)
     {
-        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 2 - GetTarget().y, 2)) < dist && dir != 3)
+        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 4 - GetTarget().y, 2)) < dist && dir != 3)
         {
-            dist = sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 2 - GetTarget().y, 2));
+            dist = sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 4 - GetTarget().y, 2));
             selected = 2;
         }
     }
     if(ways[3] == false)
     {
-        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y + 2 - GetTarget().y, 2)) < dist && dir != 2)
+        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y + 4 - GetTarget().y, 2)) < dist && dir != 2)
         {
             selected = 3;
         }
@@ -220,24 +239,26 @@ void Sparga::ImplChase(Map &map)
     switch (dir)
     {
     case 0:
-        SetPosition(GetPosition().x - 2, GetPosition().y);
-        SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
+        SetPosition(GetPosition().x - 4, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x - 4), static_cast<float>(GetPosition().y));
         break;
     case 1:
-        SetPosition(GetPosition().x + 2, GetPosition().y);
-        SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
+        SetPosition(GetPosition().x + 4, GetPosition().y);
+        SetBodyPosition(static_cast<float>(GetPosition().x + 4), static_cast<float>(GetPosition().y));
 
         break;
     case 2:
-        SetPosition(GetPosition().x, GetPosition().y - 2);
-        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
+        SetPosition(GetPosition().x, GetPosition().y - 4);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 4));
         break;
     case 3:
-        SetPosition(GetPosition().x, GetPosition().y + 2);
-        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
+        SetPosition(GetPosition().x, GetPosition().y + 4);
+        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 4));
         break;
     default: ;
     }
+    if (dir < 0 || dir > 3)
+        throw BankerError("Banker | directia selectata nu exista!");
 }
 
 std::shared_ptr<Banker> Sparga::ImplClone() const
@@ -250,6 +271,7 @@ Sparga::Sparga() : Banker()
     dir = 0;
     timerClock.restart();
     elapsedTime = 0;
+    SetSpeed(1);
     SetBody(static_cast<float>(CELL_SIZE) / 2, sf::Color::Cyan, static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y));
 }
 
@@ -264,7 +286,4 @@ Sparga& Sparga::operator=(const Sparga& other)
     return *this;
 }
 
-Sparga::Sparga(const Sparga &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime)
-{
-
-}
+Sparga::Sparga(const Sparga &other) : Banker(other), dir(other.dir), timerClock(other.timerClock), elapsedTime(other.elapsedTime){}

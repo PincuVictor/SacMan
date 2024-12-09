@@ -74,6 +74,11 @@ add_executable(${PROJECT_NAME}
         sources/Sbungu.cpp
         sources/Smarga.cpp
         sources/Smungu.cpp
+        headers/BankerError.hpp
+        headers/GameError.hpp
+        headers/SacManError.hpp
+        headers/MapError.hpp
+        headers/Sparga.hpp
         sources/Sparga.cpp
 )
 

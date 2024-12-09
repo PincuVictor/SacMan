@@ -1,5 +1,7 @@
 #pragma once
 #include "Banker.hpp"
+#include "Map.hpp"
+#include <random>
 
 class Sparga : public Banker
 {

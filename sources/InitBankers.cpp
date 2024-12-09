@@ -16,13 +16,13 @@ std::shared_ptr<Banker> InitBankers::Initialize(const int id)
     }
     if(id == 2)
     {
-        Sparga sparga;
-        banker = sparga.Clone();
+        Smarga smarga;
+        banker = smarga.Clone();
     }
     if(id == 3)
     {
-        Smarga smarga;
-        banker = smarga.Clone();
+        Sparga sparga;
+        banker = sparga.Clone();
     }
     return banker;
 }

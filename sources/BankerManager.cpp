@@ -1,16 +1,27 @@
 #include "../headers/BankerManager.hpp"
+
 #include <thread>
+
+#include "../headers/BankerError.hpp"
 
 BankerManager::BankerManager()
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
+    {
         ig_Bankers[i] = InitBankers::Initialize(i);
+        if(ig_Bankers[i] == nullptr)
+            throw BankerError("Eroare la initializarea Bankerilor");
+    }
 }
 
 BankerManager::BankerManager(const BankerManager& BM)
 {
     for(int i = 0; i < BANKERS_NUMBER; ++i)
+    {
         ig_Bankers[i] = InitBankers::Copy(BM.ig_Bankers[i]);
+        if(ig_Bankers[i] == nullptr)
+            throw BankerError("Eroare la copierea Bankerilor");
+    }
 }
 
 BankerManager& BankerManager::operator=(const BankerManager& BM)
