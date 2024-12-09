@@ -3,7 +3,6 @@
 #include "BankerManager.hpp"
 #include <array>
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 #include "Global.hpp"
 
 class Level

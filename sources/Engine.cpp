@@ -1,5 +1,7 @@
 #include "../headers/Engine.hpp"
 
+#include <iostream>
+
 Engine::Engine(sf::RenderWindow &gameWindow) : window(gameWindow)
 {
     ig_map = this->map.GetMap(1);
