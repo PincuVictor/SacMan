@@ -78,6 +78,8 @@ add_executable(${PROJECT_NAME}
         headers/GameError.hpp
         headers/SacManError.hpp
         headers/MapError.hpp
+        headers/Sparga.hpp
+        sources/Sparga.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

@@ -3,6 +3,7 @@
 #include "Smungu.hpp"
 #include "Sbungu.hpp"
 #include "Smarga.hpp"
+#include "Sparga.hpp"
 
 class InitBankers
 {
