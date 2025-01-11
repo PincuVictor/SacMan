@@ -28,7 +28,7 @@ Map::Map()
     }
 }
 
-[[nodiscard]] std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> Map::GetMap(const int lvl) const
+[[nodiscard]] std::array<std::array<unsigned char, MAP1_WIDTH>, MAP1_HEIGHT> Map::GetMap() const
 {
     for (int i = 0; i < MAP1_WIDTH-1; i++)
     {
@@ -39,8 +39,6 @@ Map::Map()
                 throw MapError("Caractere invalide pentru construirea hartii!");
         }
     }
-    if(lvl == 1)
-        return map1;
     return map1;
 }
 

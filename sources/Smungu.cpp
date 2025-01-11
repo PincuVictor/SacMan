@@ -273,9 +273,6 @@ Smungu::Smungu() : Banker()
 
 Smungu& Smungu::operator=(const Smungu& other)
 {
-    SetPosition(other.GetPosition().x, other.GetPosition().y);
-    SetTarget(other.GetTarget().x, other.GetTarget().y);
-    SetSpeed(other.GetSpeed());
     dir = other.dir;
     timerClock = other.timerClock;
     elapsedTime = other.elapsedTime;

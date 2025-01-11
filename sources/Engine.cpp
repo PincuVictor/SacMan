@@ -4,7 +4,7 @@
 
 Engine::Engine(sf::RenderWindow &gameWindow) : window(gameWindow)
 {
-    ig_map = this->map.GetMap(1);
+    ig_map = this->map.GetMap();
     for(int i = 0; i < MAP1_HEIGHT; i++)
     {
         for(int j = 0; j < MAP1_WIDTH; j++)
@@ -21,7 +21,7 @@ void Engine::Update()
 {
     ig_SacMan.Update(map);
     ig_BankerManager.CallUpdate(map, ig_SacMan);
-    Level::DrawMap(this->map.GetMap(1), window, ig_SacMan, ig_BankerManager);
+    Level::DrawMap(this->map.GetMap(), window, ig_SacMan, ig_BankerManager);
 }
 
 std::ostream& operator<<(std::ostream& stream, const Engine& engine)
