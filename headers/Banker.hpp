@@ -15,7 +15,6 @@ class Banker
 protected:
     void SetSpeed(int s);
     void SetBody(float radius, sf::Color color, float _x, float _y);
-    void SetBodyPosition(float _x, float _y);
     void SetTarget(int _x, int _y);
 public:
     void Update(Map &map, SacMan &ig_SacMan);
@@ -25,7 +24,6 @@ public:
     void SetPosition(int _x, int _y);
     void GetOut();
     sf::CircleShape GetBody();
-    int GetSpeed() const;
     [[nodiscard]] sf::Vector2<int> GetPosition() const;
     [[nodiscard]] sf::Vector2<int> GetTarget() const;
     Banker();

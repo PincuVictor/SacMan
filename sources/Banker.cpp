@@ -270,20 +270,9 @@ void Banker::SetBody(const float radius, const sf::Color color, const float _x, 
     body.setPosition(sf::Vector2f(_x, _y));
 }
 
-void Banker::SetBodyPosition(const float _x, const float _y)
-{
-    body.setPosition(sf::Vector2f(_x, _y));
-}
-
 sf::CircleShape Banker::GetBody()
 {
     return body;
-}
-
-
-int Banker::GetSpeed() const
-{
-    return speed;
 }
 
 [[nodiscard]] sf::Vector2<int> Banker::GetPosition() const
