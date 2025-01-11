@@ -11,7 +11,6 @@ class Banker
     bool useDoor = true;
     sf::CircleShape body;
     virtual void ImplUpdate(Map &map, SacMan &ig_SacMan) = 0;
-    virtual void ImplChase(Map &map) = 0;
     [[nodiscard]] virtual std::shared_ptr<Banker> ImplClone() const = 0;
 protected:
     void SetSpeed(int s);
@@ -20,8 +19,9 @@ protected:
     void SetTarget(int _x, int _y);
 public:
     void Update(Map &map, SacMan &ig_SacMan);
-    void Chase(Map &map);
+    int Chase(Map &map, int dir);
     [[nodiscard]] std::shared_ptr<Banker> Clone() const;
+    int RandomDirSelect(int dir, Map &map, int boundarylx, int boundaryrx, int boundaryly, int boundaryry);
     void SetPosition(int _x, int _y);
     void GetOut();
     sf::CircleShape GetBody();

@@ -10,7 +10,6 @@ class Sbungu : public Banker
     sf::Clock timerClock;
     float elapsedTime = 0;
     void ImplUpdate(Map &map, SacMan &ig_SacMan) override;
-    void ImplChase(Map &map) override;
     [[nodiscard]] std::shared_ptr<Banker> ImplClone() const override;
 
 public:

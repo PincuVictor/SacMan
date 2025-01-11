@@ -41,110 +41,11 @@ void Sbungu::ImplUpdate(Map &map, SacMan &ig_SacMan)
                 elapsedTime = 0;
                 SetTarget(-1, -1);
             }
-            Chase(map);
+            dir = Chase(map, dir);
         }
         else
             SetTarget(-1, -1);
     }
-}
-
-void Sbungu::ImplChase(Map &map)
-{
-    bool ways[4];
-    int selected = 0, availableWays = 0;
-    double dist = 20000000;
-    if (GetPosition().x <= 2 * -CELL_SIZE || GetPosition().x >= (CELL_SIZE + 10) * MAP1_WIDTH
-        || GetPosition().y <= 2 * -CELL_SIZE || GetPosition().y >= (CELL_SIZE + 10) * MAP1_HEIGHT)
-        throw BankerError("Banker Out of Bounds!");
-    ways[0] = map.CheckCollision(false, true, GetPosition().x - 2, GetPosition().y);
-    ways[1] = map.CheckCollision(false, true, GetPosition().x + 2, GetPosition().y);
-    ways[2] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y - 2);
-    ways[3] = map.CheckCollision(false, true, GetPosition().x, GetPosition().y + 2);
-    if(GetPosition().x - 2 <= 0)
-        ways[0] = true;
-    if(GetPosition().x + 2 >= (MAP1_WIDTH - 1) * CELL_SIZE)
-        ways[1] = true;
-    if(GetPosition().y - 2 <= 0)
-        ways[2] = true;
-    if(GetPosition().y + 2 >= (MAP1_HEIGHT - 1) * CELL_SIZE)
-        ways[3] = true;
-    for(const bool way : ways)
-        if(way == false)
-            availableWays++;
-    if (availableWays == 0)
-        throw BankerError("Banker blocat! Nicio cale posibila detectata");
-    if(ways[0] == false)
-    {
-        if(sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 1)
-        {
-            dist = sqrt(pow(GetPosition().x - 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
-            selected = 0;
-        }
-    }
-    if(ways[1] == false)
-    {
-        if(sqrt(pow(GetPosition().x + 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2)) < dist && dir != 0)
-        {
-            dist = sqrt(pow(GetPosition().x + 2 - GetTarget().x, 2) + pow(GetPosition().y - GetTarget().y, 2));
-            selected = 1;
-        }
-    }
-    if(ways[2] == false)
-    {
-        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 2 - GetTarget().y, 2)) < dist && dir != 3)
-        {
-            dist = sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y - 2 - GetTarget().y, 2));
-            selected = 2;
-        }
-    }
-    if(ways[3] == false)
-    {
-        if(sqrt(pow(GetPosition().x - GetTarget().x, 2) + pow(GetPosition().y + 2 - GetTarget().y, 2)) < dist && dir != 2)
-        {
-            selected = 3;
-        }
-    }
-    if(availableWays == 1)
-        switch (dir)
-        {
-        case 0:
-            selected = 1;
-            break;
-        case 1:
-            selected = 0;
-            break;
-        case 2:
-            selected = 3;
-            break;
-        case 3:
-            selected = 2;
-            break;
-        default: ;
-        }
-    dir = selected;
-    switch (dir)
-    {
-    case 0:
-        SetPosition(GetPosition().x - 2, GetPosition().y);
-        SetBodyPosition(static_cast<float>(GetPosition().x - 2), static_cast<float>(GetPosition().y));
-        break;
-    case 1:
-        SetPosition(GetPosition().x + 2, GetPosition().y);
-        SetBodyPosition(static_cast<float>(GetPosition().x + 2), static_cast<float>(GetPosition().y));
-
-        break;
-    case 2:
-        SetPosition(GetPosition().x, GetPosition().y - 2);
-        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y - 2));
-        break;
-    case 3:
-        SetPosition(GetPosition().x, GetPosition().y + 2);
-        SetBodyPosition(static_cast<float>(GetPosition().x), static_cast<float>(GetPosition().y + 2));
-        break;
-    default: ;
-    }
-    if (dir < 0 || dir > 3)
-        throw BankerError("Banker | directia selectata nu exista!");
 }
 
 std::shared_ptr<Banker> Sbungu::ImplClone() const
