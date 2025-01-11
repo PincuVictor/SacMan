@@ -9,7 +9,6 @@ class Smarga : public Banker
     float elapsedTime = 0;
     int boundarylx, boundaryly, boundaryrx, boundaryry;
     void ImplUpdate(Map &map, SacMan &ig_SacMan) override;
-    void ImplChase(Map &map) override;
     [[nodiscard]] std::shared_ptr<Banker> ImplClone() const override;
 
 public:
